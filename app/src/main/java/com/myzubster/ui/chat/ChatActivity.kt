@@ -5,7 +5,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.myzubster.R
-import com.myzubster.payment.PaymentFragment
+import com.myzubster.fragments.PaymentFragment
 
 class ChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,9 +22,9 @@ class ChatActivity : AppCompatActivity() {
             replace(
                 R.id.chatFragmentContainer,
                 PaymentFragment.newInstance(
-                    amountXmr = amountXmr,
-                    description = description,
-                    confirmations = 0
+                    amount = amountXmr.toDoubleOrNull() ?: 0.01,
+                    sellerId = "seller-demo",
+                    description = description
                 )
             )
             addToBackStack("payment")
