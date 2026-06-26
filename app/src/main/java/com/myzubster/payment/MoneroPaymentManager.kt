@@ -16,7 +16,8 @@ data class CreateMoneroPaymentRequest(
     val amountXmr: String,
     val description: String,
     val confirmations: Int = 0,
-    val metadata: Map<String, String> = emptyMap()
+    val metadata: Map<String, String> = emptyMap(),
+    val sellerId: String = "seller-demo"
 )
 
 data class PaymentDetails(
@@ -58,12 +59,27 @@ class MoneroPaymentManager(
         .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
         .build()
 
+    suspend fun generatePaymentRequest(amount: Double, description: String, sellerId: String): PaymentDetails {
+        return createPayment(
+            CreateMoneroPaymentRequest(
+                amountXmr = java.math.BigDecimal.valueOf(amount).stripTrailingZeros().toPlainString(),
+                description = description,
+                sellerId = sellerId,
+                metadata = mapOf("sellerId" to sellerId)
+            )
+        )
+    }
+
+    suspend fun verifyPaymentStatus(paymentId: String): PaymentDetails = getPaymentStatus(paymentId)
+
     suspend fun createPayment(request: CreateMoneroPaymentRequest): PaymentDetails = withContext(Dispatchers.IO) {
         val bodyJson = JSONObject()
             .put("amountXmr", request.amountXmr)
+            .put("amount", request.amountXmr)
             .put("description", request.description)
+            .put("sellerId", request.sellerId)
             .put("confirmations", request.confirmations)
-            .put("metadata", JSONObject(request.metadata))
+            .put("metadata", JSONObject(request.metadata + mapOf("sellerId" to request.sellerId)))
 
         val httpRequest = Request.Builder()
             .url("${baseUrl.trimEnd('/')}/api/payment/create")
