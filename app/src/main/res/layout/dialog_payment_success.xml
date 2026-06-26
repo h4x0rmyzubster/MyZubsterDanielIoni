@@ -7,24 +7,26 @@
     android:padding="24dp">
 
     <TextView
+        android:id="@+id/paymentSuccessIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="Conferma pagamento"
         android:text="✅"
-        android:textSize="48sp" />
+        android:textSize="56sp" />
 
     <TextView
+        android:id="@+id/paymentSuccessTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Pagamento XMR ricevuto"
-        android:textSize="20sp"
+        android:text="Pagamento ricevuto!"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
-    <TextView
+    <Button
+        android:id="@+id/closePaymentSuccessButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="La transazione Monero ha raggiunto le conferme richieste."
-        android:textSize="14sp" />
+        android:layout_marginTop="20dp"
+        android:text="Chiudi" />
 </LinearLayout>
