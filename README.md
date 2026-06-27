@@ -1,48 +1,39 @@
 # MyZubster 🤝
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Android CI](https://img.shields.io/badge/Android%20CI-passing-brightgreen)](https://developer.android.com/studio/) // Placeholder for actual CI badge
+[![Android](https://img.shields.io/badge/Android-3DDC84?style=flat&logo=android&logoColor=white)](https://developer.android.com/)
+[![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Monero](https://img.shields.io/badge/Monero-FF6600?style=flat&logo=monero&logoColor=white)](https://getmonero.org/)
 
-MyZubster è un'applicazione Android open-source progettata per favorire un'economia iper-locale connettendo vicini per lo scambio di competenze e servizi. Costruito con una forte enfasi sulla privacy e sulla decentralizzazione, MyZubster consente agli utenti di offrire e richiedere servizi, pagando in modo sicuro con Monero (XMR).
-
----
-
-## 👋 About MyZubster
-
-MyZubster mira a creare un vivace marketplace guidato dalla comunità, dove gli individui possono sfruttare le proprie competenze e trovare assistenza locale. Che tu sia un idraulico, un parrucchiere, un tutor o abbia bisogno di aiuto con l'IT, MyZubster è la tua piattaforma per connetterti con le persone nelle vicinanze.
+**MyZubster** è un'applicazione Android open-source che connette persone del vicinato per scambiarsi competenze e servizi. Dai una mano al tuo vicino o ricevi aiuto da lui, tutto in modo sicuro, privato e decentralizzato.
 
 ---
 
-## 🌟 Funzionalità Principali
+## ✨ Funzionalità principali
 
-*   🔐 **Pagamenti Monero (XMR) Non-Custodial:** Tutte le transazioni sono private e sicure, con gli utenti che mantengono il pieno controllo delle proprie chiavi private.
-*   👤 **Profili Utente Dettagliati:** Mostra le tue competenze offerte (es. tuttofare, stilista, tecnico) e elenca i servizi che cerchi.
-*   💬 **Chat Criptata End-to-End:** Comunica direttamente e in modo sicuro con i tuoi vicini per concordare i dettagli del servizio.
-*   📍 **Geolocalizzazione di Vicinato:** Scopri competenze e servizi disponibili proprio nella tua zona locale.
-*   ⭐ **Sistema di Recensioni a Doppio Senso:** Costruisci fiducia e reputazione all'interno della community lasciando e ricevendo feedback onesto.
-*   🛡️ **Integrazione Consigliata con Mullvad VPN:** Per un livello avanzato di privacy online.
-*   ⛏️ **Mining Opzionale di Monero:** Contribuisci alla rete Monero e potenzialmente guadagna ricompense.
-*   💰 **Commissione Trasparente del 2% sulle Transazioni:** Una piccola e chiara commissione supporta la manutenzione e la crescita della piattaforma.
+- **🔐 Pagamenti in Monero (XMR)**: Privacy totale e controllo dei tuoi fondi. Ogni utente gestisce le proprie chiavi private (non-custodial).
+- **📱 Matching di competenze**: Pubblica ciò che sai fare o ciò che cerchi. L'app ti mette in contatto con persone nelle vicinanze.
+- **💬 Chat criptata**: Comunica in modo sicuro con i tuoi vicini per accordarti su dettagli e prezzi.
+- **📍 Geolocalizzazione**: Trova servizi e competenze nella tua zona, costruendo un'economia di prossimità.
+- **⭐ Recensioni**: Valuta gli scambi e costruisci fiducia all'interno della community.
+- **💰 Commissione trasparente**: Solo il 2% sulle transazioni per sostenere lo sviluppo e la manutenzione della piattaforma.
 
 ---
 
-## 🏗️ Architettura
+## 🚀 Come iniziare
 
-MyZubster è costruito utilizzando un'architettura moderna e robusta:
+### Prerequisiti
 
-*   **Frontend:** Android (Kotlin) con il pattern architetturale MVVM (Model-View-ViewModel) per manutenibilità e scalabilità.
-*   **Backend:** Un server Node.js robusto che utilizza Express.js per il routing delle API e MongoDB come database.
-*   **Pagamenti:** Integrazione con `monero-merchant` per transazioni Monero sicure e private.
-*   **API:** Design di API RESTful per una comunicazione fluida tra frontend e backend.
+- **Android Studio** (versione Arctic Fox o superiore)
+- **JDK 11** o superiore
+- **Node.js** (versione 16 o superiore)
+- **MongoDB** (in esecuzione localmente o su un servizio cloud)
+- Un **nodo Monero** (o accesso a un nodo pubblico)
 
----
+### Installazione
 
-## 🚀 Installazione e Configurazione
-
-Segui questi passaggi per mettere MyZubster in funzione:
-
-### 1. Clona il Repository
-Inizia clonando il progetto sulla tua macchina locale:
-```bash
-git clone https://github.com/tuo-username/MyZubster.git
-cd MyZubster
+1. **Clona il repository**:
+   ```bash
+   git clone https://github.com/h4x0rmyzubster/myzubster.git
+   cd myzubster
