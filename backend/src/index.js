@@ -5,6 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { randomUUID, createHash } = require('crypto');
 const PaymentTransaction = require('./models/PaymentTransaction');
+const { createReviewRouter } = require('./reviews/routes');
 const { sendPaymentConfirmedNotification } = require('./notifications/firebase');
 const { sendPushNotification, sendPushNotifications } = require('./services/notificationService');
 const { loadPaymentConfig, normalizeConfirmations } = require('./payment/config');
@@ -36,11 +37,13 @@ app.get('/health', (_req, res) => {
   });
 });
 
+app.use('/api/reviews', createReviewRouter());
+
 app.get('/api/skills/:skillId', async (req, res) => {
   try {
     const skill = await findSkillById(req.params.skillId);
     if (!skill) return res.status(404).json({ error: 'skill not found' });
-    res.json(publicSkill(skill));
+    res.json(await publicSkill(skill));
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -349,12 +352,14 @@ async function findSkillById(skillId) {
   return skills.findOne({ $or: selectors });
 }
 
-function publicSkill(skill) {
+async function publicSkill(skill) {
   const user = skill.user || {
     id: skill.sellerId || skill.userId || '',
     name: skill.sellerName || skill.userName || 'Utente MyZubster',
     avatarUrl: skill.avatarUrl || null
   };
+  const userId = user.id || skill.sellerId || '';
+  const ratingInfo = await findUserRating(userId);
 
   return {
     id: String(skill.id || skill.skillId || skill._id),
@@ -367,11 +372,22 @@ function publicSkill(skill) {
     address: skill.address || null,
     sellerId: skill.sellerId || user.id,
     user: {
-      id: user.id || skill.sellerId || '',
+      id: userId,
       name: user.name || 'Utente MyZubster',
-      avatarUrl: user.avatarUrl || null
+      avatarUrl: user.avatarUrl || null,
+      rating: ratingInfo.rating ?? user.rating ?? skill.userRating ?? skill.rating ?? 0,
+      reviewCount: ratingInfo.reviewCount ?? user.reviewCount ?? skill.reviewCount ?? 0
     }
   };
+}
+
+async function findUserRating(userId) {
+  if (!userId) return {};
+  const stringUserId = String(userId);
+  const selectors = [{ userId: stringUserId }];
+  if (mongoose.Types.ObjectId.isValid(stringUserId)) selectors.push({ _id: new mongoose.Types.ObjectId(stringUserId) });
+  const user = await users.findOne({ $or: selectors }, { projection: { rating: 1, reviewCount: 1 } });
+  return user ? { rating: user.rating, reviewCount: user.reviewCount } : {};
 }
 
 function publicPayment(transaction, paymentCallbackUrl = null) {

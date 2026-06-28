@@ -1,6 +1,8 @@
 package com.myzubster.network
 
 import com.myzubster.BuildConfig
+import com.myzubster.models.CreateReviewRequest
+import com.myzubster.models.Review
 import com.myzubster.models.Skill
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -47,6 +49,15 @@ data class PaymentWebhookRequest(
 interface ApiService {
     @GET("api/skills/{skillId}")
     suspend fun getSkillDetail(@Path("skillId") skillId: String): Skill
+
+    @POST("api/reviews")
+    suspend fun createReview(@Body request: CreateReviewRequest): Review
+
+    @GET("api/reviews/user/{userId}")
+    suspend fun getReviewsForUser(@Path("userId") userId: String): List<Review>
+
+    @GET("api/reviews/skill/{skillId}")
+    suspend fun getReviewsForSkill(@Path("skillId") skillId: String): List<Review>
 
     @POST("api/payment/create")
     suspend fun createPayment(@Body request: ApiPaymentCreateRequest): PaymentApiResponse
