@@ -18,5 +18,7 @@ data class Skill(
 data class SkillUser(
     val id: String,
     val name: String,
-    val avatarUrl: String? = null
+    val avatarUrl: String? = null,
+    val rating: Double = 0.0,
+    val reviewCount: Int = 0
 )
