@@ -16,11 +16,24 @@ L'APK beta è disponibile nella release GitHub:
 
 ## Funzionalità
 
-- **Autenticazione** — base utenti e integrazione backend pronta per token/dispositivi e notifiche.
-- **Competenze** — ricerca, visualizzazione e pubblicazione di servizi/competenze con prezzi in euro.
-- **Chat** — conversazione tra cliente e venditore, con richiesta pagamento collegata al servizio.
+- **Autenticazione e profilo utente** — base utenti, registrazione token dispositivo, profilo locale con nome/nickname, zona, bio, competenze e wallet Monero opzionale.
+- **Competenze e servizi** — ricerca, visualizzazione e pubblicazione di servizi/competenze locali con prezzi in euro.
+- **Dettaglio competenza** — scheda servizio con informazioni del venditore, prezzo, descrizione e accesso ad azioni collegate.
+- **Chat** — conversazione tra cliente e venditore, con possibilità di richiedere un pagamento dal flusso chat.
 - **Pagamenti Monero** — checkout Monero via backend, indirizzi one-shot, tracking conferme, QR/URI e fee piattaforma del 2% configurabile.
 - **Recensioni** — sistema di recensioni e rating collegato a utenti e competenze.
+- **Notifiche push** — integrazione Firebase Cloud Messaging per messaggi e conferme pagamento, quando configurata.
+- **Banner sponsor** — banner cliccabili per Mullvad VPN e SimpleSwap.io.
+- **Backend API** — API Node.js/Express per competenze, chat, recensioni, notifiche e pagamenti.
+
+## Tecnologie utilizzate
+
+- **Kotlin / Android** — app mobile nativa Android.
+- **Node.js / Express** — backend REST per dati, chat, notifiche e pagamenti.
+- **MongoDB / Mongoose** — persistenza backend per utenti, messaggi, recensioni e transazioni.
+- **Monero** — pagamenti tramite wallet RPC o MoneroPay, con gestione server-side degli indirizzi e della fee piattaforma.
+- **Firebase Cloud Messaging** — notifiche push per messaggi e conferme pagamento.
+- **Gradle / Android Studio** — build e sviluppo dell'app Android.
 
 ## Installazione
 
