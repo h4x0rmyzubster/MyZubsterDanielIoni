@@ -1,11 +1,19 @@
 # MyZubster
 
-[![APK Download](https://img.shields.io/badge/APK-download%20placeholder-orange?style=for-the-badge&logo=android)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/releases/latest)
+[![APK Download](https://img.shields.io/badge/APK-download%20placeholder-orange?style=for-the-badge&logo=android)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/releases/download/v0.2.0/myzubster-v0.2.0.apk)
 
 **Versione:** 0.2.0  
 **Ultimo aggiornamento:** 2026-06-29
 
 MyZubster è un'app Android con backend Node.js pensata per pubblicare e trovare competenze/servizi locali, chattare tra utenti, gestire recensioni e supportare pagamenti Monero con commissione piattaforma configurabile.
+
+## Download APK
+
+L'APK della release sarà pubblicato qui:
+
+- [Scarica MyZubster v0.2.0 APK](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/releases/download/v0.2.0/myzubster-v0.2.0.apk)
+
+Nota: il link è già predisposto per la release GitHub `v0.2.0`; funzionerà appena l'asset APK verrà caricato nella release.
 
 ## Funzionalità
 
