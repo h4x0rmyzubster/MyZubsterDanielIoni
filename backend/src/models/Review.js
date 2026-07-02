@@ -111,3 +111,14 @@ reviewSchema.index({ skillId: 1, createdAt: -1 });
 reviewSchema.index({ authorId: 1, targetUserId: 1, skillId: 1, createdAt: -1 });
 
 module.exports = mongoose.models.Review || mongoose.model('Review', reviewSchema);
+
+data class Review(
+    val id: String = "",
+    val authorId: String,
+    val targetUserId: String,
+    val skillId: String,
+    var rating: Int,
+    val comment: String = "",
+    val createdAt: Date = Date()
+)
+
