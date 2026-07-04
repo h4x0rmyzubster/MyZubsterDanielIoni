@@ -47,7 +47,7 @@
                         android:id="@+id/tvServiceTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Riparazione lavatrice"
+                        android:text="Servizio"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -55,7 +55,7 @@
                         android:id="@+id/tvServicePrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Prezzo: 50 XMR"
+                        android:text="Prezzo: - XMR"
                         android:textSize="14sp"
                         android:layout_marginTop="4dp" />
 
@@ -63,7 +63,7 @@
                         android:id="@+id/tvProfessionalName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Professionista: Mario Rossi"
+                        android:text="Professionista: -"
                         android:textSize="14sp"
                         android:layout_marginTop="4dp" />
 
@@ -104,7 +104,7 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Orari disponibili -->
+            <!-- Riepilogo selezione -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,71 +121,46 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Seleziona un orario"
+                        android:text="Riepilogo"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="8dp" />
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroupTimeSlots"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        app:singleSelection="true" />
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tvNoSlots"
+                        android:id="@+id/tvSelectedDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Nessun orario disponibile per questa data"
-                        android:textColor="#757575"
-                        android:gravity="center"
-                        android:padding="16dp"
-                        android:visibility="gone" />
-
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:visibility="gone" />
+                        android:text="Data: non selezionata"
+                        android:textSize="14sp"
+                        android:layout_marginTop="8dp" />
 
                     <TextView
-                        android:id="@+id/tvError"
+                        android:id="@+id/tvSelectedTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#F44336"
-                        android:gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:visibility="gone" />
+                        android:text="Orario: non selezionato"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Note -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Note (opzionale)"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etNotes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="3" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Pulsante Prenota -->
+            <!-- Pulsante Seleziona Orario -->
             <Button
-                android:id="@+id/btnBook"
+                android:id="@+id/btnSelectTimeSlot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:text="Seleziona Orario"
+                android:textSize="16sp"
+                android:backgroundTint="#2196F3"
+                android:textColor="#FFFFFF" />
+
+            <!-- Pulsante Conferma Prenotazione -->
+            <Button
+                android:id="@+id/btnConfirmBooking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Conferma Prenotazione"
                 android:textSize="16sp"
                 android:backgroundTint="#4CAF50"
