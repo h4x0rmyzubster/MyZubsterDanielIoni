@@ -14,6 +14,7 @@
     "check": "node --check src/index.js && node --check src/models/Review.js && node --check src/models/User.js && node --check src/models/Booking.js && node --check src/models/Skill.js && node --check src/models/Quote.js && node --check src/routes/bookings.js && node --check src/routes/skillRoutes.js && node --check src/routes/quoteRoutes.js && node --check src/middleware/auth.js"
   },
   "dependencies": {
+    "axios": "^1.18.1",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
