@@ -6,35 +6,60 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.myzubster.activities.BookingHistoryActivity
-import com.myzubster.payment.ui.PaymentActivity
+import com.myzubster.network.RetrofitClient
+import com.myzubster.ui.auth.LoginActivity
+import com.myzubster.utils.TokenManager
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var tokenManager: TokenManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Pulsanti
+        tokenManager = RetrofitClient.getTokenManager()
+
+        if (!tokenManager.isLoggedIn()) {
+            goToLogin()
+            return
+        }
+
         val btnTest = findViewById<Button>(R.id.btnTest)
         val btnBookingHistory = findViewById<Button>(R.id.btnBookingHistory)
         val btnSettings = findViewById<Button>(R.id.btnSettings)
+        val btnLogout = findViewById<Button>(R.id.btnLogout)
 
-        // Test App
         btnTest.setOnClickListener {
             Toast.makeText(this, "✅ App funzionante!", Toast.LENGTH_SHORT).show()
         }
 
-        // Storico Prenotazioni
         btnBookingHistory.setOnClickListener {
-            // Usa un ID di test per ora
+            val userId = tokenManager.getUserId() ?: "65f1a2b3c4d5e6f7g8h9i0j1"
             val intent = Intent(this, BookingHistoryActivity::class.java)
-            intent.putExtra("userId", "65f1a2b3c4d5e6f7g8h9i0j1")
+            intent.putExtra("userId", userId)
             startActivity(intent)
         }
 
-        // Impostazioni
         btnSettings.setOnClickListener {
             Toast.makeText(this, "⚙️ Impostazioni", Toast.LENGTH_SHORT).show()
         }
+
+        btnLogout.setOnClickListener {
+            logout()
+        }
+    }
+
+    private fun logout() {
+        tokenManager.clear()
+        Toast.makeText(this, "🚪 Logout effettuato", Toast.LENGTH_SHORT).show()
+        goToLogin()
+    }
+
+    private fun goToLogin() {
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 }

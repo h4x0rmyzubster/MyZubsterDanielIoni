@@ -44,6 +44,16 @@
         android:text="⚙️ Impostazioni"
         android:textSize="16sp"
         android:backgroundTint="#2196F3"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🚪 Logout"
+        android:textSize="16sp"
+        android:backgroundTint="#FF5722"
         android:textColor="#FFFFFF" />
 
 </LinearLayout>

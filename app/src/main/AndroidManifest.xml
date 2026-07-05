@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.myzubster">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -24,9 +23,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
-        <!-- Main Activity -->
+        <!-- Auth Activities -->
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.auth.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.MyZubster">
             <intent-filter>
@@ -35,31 +34,18 @@
             </intent-filter>
         </activity>
 
-        <!-- Login Activity -->
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".ui.auth.RegisterActivity"
             android:exported="false"
             android:theme="@style/Theme.MyZubster" />
 
-        <!-- Register Activity -->
+        <!-- Main Activity -->
         <activity
-            android:name=".activities.RegisterActivity"
+            android:name=".MainActivity"
             android:exported="false"
             android:theme="@style/Theme.MyZubster" />
 
-        <!-- Profile Activity -->
-        <activity
-            android:name=".activities.ProfileActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MyZubster" />
-
-        <!-- Skills Activity -->
-        <activity
-            android:name=".activities.SkillsActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MyZubster" />
-
-        <!-- Booking History Activity -->
+        <!-- Booking Activities -->
         <activity
             android:name=".activities.BookingHistoryActivity"
             android:exported="false"
@@ -70,7 +56,6 @@
                 android:value=".MainActivity" />
         </activity>
 
-        <!-- Booking Detail Activity -->
         <activity
             android:name=".activities.BookingDetailActivity"
             android:exported="false"
@@ -78,40 +63,51 @@
 
         <!-- Payment Activity -->
         <activity
-            android:name=".payment.PaymentActivity"
+            android:name=".payment.ui.PaymentActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyZubster"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <!-- Other Activities -->
+        <activity
+            android:name=".activities.ProfileActivity"
             android:exported="false"
             android:theme="@style/Theme.MyZubster" />
 
-        <!-- Chat Activity -->
+        <activity
+            android:name=".activities.SkillsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyZubster" />
+
         <activity
             android:name=".activities.ChatActivity"
             android:exported="false"
             android:theme="@style/Theme.MyZubster" />
 
-        <!-- Escrow Activity -->
         <activity
             android:name=".escrow.EscrowActivity"
             android:exported="false"
             android:theme="@style/Theme.MyZubster" />
 
-        <!-- Review Activity -->
         <activity
             android:name=".activities.ReviewActivity"
             android:exported="false"
             android:theme="@style/Theme.MyZubster" />
 
-        <!-- Settings Activity -->
         <activity
             android:name=".activities.SettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.MyZubster" />
 
-        <!-- Notification Service -->
+        <!-- Services -->
         <service
             android:name=".services.NotificationService"
             android:exported="false" />
 
-        <!-- Firebase Messaging Service -->
         <service
             android:name=".services.MyFirebaseMessagingService"
             android:exported="false">
