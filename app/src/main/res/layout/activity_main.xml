@@ -15,7 +15,16 @@
         android:textSize="36sp"
         android:textStyle="bold"
         android:textColor="#6200EE"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tvSessionTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⏱️ Sessione: 1h 0m"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginBottom="24dp" />
 
     <Button
         android:id="@+id/btnTest"
