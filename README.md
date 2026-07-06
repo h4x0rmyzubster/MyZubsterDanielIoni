@@ -1,118 +1,3 @@
-## 🤝 Contributing
-
-We welcome contributions! 
-
-- 🟣 [**Good First Issues**](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/labels/good%20first%20issue) - Perfect for newcomers
-- 🟢 [**Help Wanted**](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/labels/help%20wanted) - Need extra help
-
-Check our [Contributing Guide](CONTRIBUTING.md) to get started!
-
-[![Good First Issues](https://img.shields.io/github/issues/h4x0rmyzubster/MyZubsterh4x0r/good%20first%20issue.svg)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/labels/good%20first%20issue)
-[![Help Wanted](https://img.shields.io/github/issues/h4x0rmyzubster/MyZubsterh4x0r/help%20wanted.svg)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/labels/help%20wanted)
-
----
-
-# 🧩 MyZubster: Skill Exchange Platform
-
-**MyZubster** is an open-source platform that connects people to exchange skills and services — from plumbing and hairdressing to tutoring and tech support. With a complete booking system, profiles, reviews, and community features, it's designed for peer-to-peer collaboration without intermediaries.
-
-## 🚀 SaaS Platform Available!
-
-MyZubster is now available as a **SaaS (Software as a Service)** platform with:
-- ✅ **2% platform fee** (supports development & infrastructure)
-- ✅ **Automatic Monero payments** with escrow
-- ✅ **Self-hosted option** for developers
-- ✅ **Official hosted service** at [https://myzubster.com](https://myzubster.com)
-
-[![SaaS](https://img.shields.io/badge/SaaS-Available-green)](https://myzubster.com)
-[![Monero](https://img.shields.io/badge/Monero-Payments-orange)](https://getmonero.org)
-
----
-
-[![License](https://img.shields.io/badge/License-MIT%20%7C%20GPLv3-blue?style=flat)](LICENSE)
-[![Android](https://img.shields.io/badge/Platform-Android-brightgreen)](https://developer.android.com/)
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.9-purple)](https://kotlinlang.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-20+-green)](https://nodejs.org/)
-[![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/actions)
-[![Open Source](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red)](https://opensource.org/)
-
-## 🏷️ Badges
-
-[![GitHub stars](https://img.shields.io/github/stars/h4x0rmyzubster/MyZubsterh4x0r.svg?style=social)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/h4x0rmyzubster/MyZubsterh4x0r.svg?style=social)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/h4x0rmyzubster/MyZubsterh4x0r.svg)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/h4x0rmyzubster/MyZubsterh4x0r.svg)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/pulls)
-[![License](https://img.shields.io/github/license/h4x0rmyzubster/MyZubsterh4x0r.svg)](LICENSE)
-[![Contributors](https://img.shields.io/github/contributors/h4x0rmyzubster/MyZubsterh4x0r.svg)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/graphs/contributors)
-[![GitHub last commit](https://img.shields.io/github/last-commit/h4x0rmyzubster/MyZubsterh4x0r.svg)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/commits/main)
-
----
-
-## 🚀 What is MyZubster?
-
-MyZubster is a hyperlocal skill-sharing platform. It lets people in the same neighborhood offer services, request help, chat, book appointments, and send quotes — all in a community-driven environment.
-
-**The goal** is to empower communities to collaborate directly, bypassing centralized platforms and building local connections.
-
----
-
-## 💰 Platform Fee
-
-MyZubster applies a **2% platform fee** on all transactions to support:
-
-- 🖥️ **Infrastructure costs** (servers, databases, monitoring)
-- 👨‍💻 **Development & maintenance**
-- 🛡️ **Security & escrow services**
-- 📱 **Mobile app updates**
-
-The fee is **automatically applied** via smart contract and cannot be removed on the official SaaS platform.
-
-**Fee Wallet:** Maintained by Daniel Ioni (h4x0rmyzubster)
-
-For self-hosted versions, the fee can be modified or removed.
-
----
-
-## 🛠️ SaaS vs Self-Hosted
-
-| Feature | SaaS (Official) | Self-Hosted |
-|---------|-----------------|-------------|
-| **Fee** | 2% (automatic) | Configurable |
-| **Updates** | Automatic | Manual |
-| **Support** | Priority | Community |
-| **Escrow** | ✅ Included | Optional |
-| **Monitoring** | 24/7 | Self-managed |
-| **Cost** | Free (fee-based) | Infrastructure cost |
-
-**Choose SaaS for:** Quick start, no maintenance, automatic updates, priority support.
-
-**Choose Self-Hosted for:** Full control, custom modifications, privacy, learning.
-
----
-
-## 💳 Monero Integration
-
-MyZubster uses **Monero (XMR)** for private, secure payments:
-
-- 🔒 **Privacy-first**: No transaction tracking
-- 💰 **2% Platform Fee**: Auto-deducted for sustainability
-- 🛡️ **Escrow Protection**: Funds locked until work is confirmed
-- ⚡ **Instant Payments**: Fast confirmation with 10+ confirmations
-- 🌍 **Global**: Send/receive XMR anywhere
-
-### How it works
-
-1. Client sends XMR to escrow address
-2. 2% fee is deducted automatically
-3. Funds are held in escrow until work is completed
-4. Professional receives payment (minus 2% fee)
-5. Fee goes to platform wallet (Daniel Ioni)
-
-### Test Mode
-
-For testing without real Monero, use simulation mode:
-```bash
-MONERO_PAYMENT_SIMULATION_MS=5000 npm start
 ✨ Key Features
 Core Features
 
@@ -144,16 +29,20 @@ Advanced Features
 
     🔄 Dual Licensing — MIT and GPLv3 licenses for maximum flexibility.
 
+    🪙 Decentralized Fee System — Smart contract-based fee management with governance.
+
 🏗️ Tech Stack
 Layer	Technology
 Mobile	Kotlin, Android SDK, Retrofit, Material Design
 Backend	Node.js, Express, MongoDB, JWT, bcrypt
+Blockchain	Solidity, Hardhat, Web3.js, OpenZeppelin
 Payments	Monero RPC, Escrow, 2% Fee Service
+Fee Management	Decentralized Smart Contract (FeeManager)
 Bookings	Calendar-based scheduling with time slots
 Quotes	Professional-client estimate system
 Notifications	Firebase FCM / UnifiedPush (optional)
 AI (optional)	Groq, Gemini (for skill descriptions)
-Testing	JUnit (Android), Jest (Backend)
+Testing	JUnit (Android), Jest (Backend), Hardhat (Contracts)
 CI/CD	GitHub Actions (tests & build at every commit)
 Admin Panel	React + Material-UI (optional)
 Web Dashboard	React (for public interface)
@@ -171,8 +60,8 @@ Prerequisites
 Clone the repository
 bash
 
-git clone https://github.com/h4x0rmyzubster/MyZubsterh4x0r.git
-cd MyZubsterh4x0r
+git clone https://github.com/DanielIoni-creator/MyZubsterAPP.git
+cd MyZubsterAPP
 
 Backend Setup
 bash
@@ -183,6 +72,16 @@ cp .env.example .env
 # Edit .env with your MongoDB URI, Monero RPC URL, and API keys.
 npm start
 # The backend will run on http://localhost:5000
+
+Smart Contract Setup (Optional)
+bash
+
+cd backend
+npx hardhat compile
+npx hardhat run scripts/deploy.js --network hardhat
+# For local testing
+npx hardhat node
+npx hardhat run scripts/deploy.js --network localhost
 
 Android App
 bash
@@ -213,6 +112,10 @@ bash
 # Backend tests
 cd backend
 npm test
+
+# Smart contract tests
+cd backend
+npx hardhat test
 
 # Android tests (in Android Studio or terminal)
 ./gradlew test
@@ -339,6 +242,8 @@ How it works:
 
     Escrow uses Monero multisig for secure fund locking
 
+    Smart contracts are audited and open source
+
 If you find a security issue, please contact the maintainer privately.
 📄 License
 
@@ -352,6 +257,8 @@ SPDX-License-Identifier: MIT OR GPL-3.0-or-later
     All open-source libraries and contributors who make this project possible
 
     The community for feedback and support
+
+    The Ethereum and Hardhat communities for smart contract tooling
 
 🚀 Ready to join the community?
 
