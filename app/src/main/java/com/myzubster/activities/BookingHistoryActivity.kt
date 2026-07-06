@@ -13,7 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.myzubster.R
 import com.myzubster.adapters.BookingHistoryAdapter
 import com.myzubster.models.BookingHistory
-import com.myzubster.network.ApiClient
+import com.myzubster.network.RetrofitClient
 import kotlinx.coroutines.*
 
 class BookingHistoryActivity : AppCompatActivity() {
@@ -107,7 +107,7 @@ class BookingHistoryActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val apiService = ApiClient.getApiService()
+                val apiService = RetrofitClient.apiService
                 val response = apiService.getBookingHistory(
                     userId = userId,
                     page = page,
@@ -117,16 +117,17 @@ class BookingHistoryActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && response.body()?.success == true) {
                         val body = response.body()
-                        body?.let {
+                        body?.let { responseBody ->
                             if (page == 1) {
                                 bookings.clear()
                             }
-                            val newBookings = it.data
+                            // I dati sono già List<BookingHistory>
+                            val newBookings = responseBody.data
                             bookings.addAll(newBookings)
                             adapter.notifyDataSetChanged()
 
-                            hasMoreData = it.pagination.total > bookings.size
-                            currentPage = it.pagination.page
+                            hasMoreData = responseBody.pagination.total > bookings.size
+                            currentPage = responseBody.pagination.page
 
                             if (bookings.isEmpty()) {
                                 tvEmpty.visibility = View.VISIBLE

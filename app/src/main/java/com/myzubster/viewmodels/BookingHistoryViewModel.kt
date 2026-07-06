@@ -28,7 +28,6 @@ class BookingHistoryViewModel : ViewModel() {
     private var currentPage = 1
     private var totalPages = 0
     private var currentUserId: String? = null
-    private var currentCategory: String? = null
     private var currentStatus: String? = null
 
     data class PaginationState(
@@ -40,7 +39,6 @@ class BookingHistoryViewModel : ViewModel() {
 
     fun loadBookingHistory(
         userId: String,
-        category: String? = null,
         status: String? = null,
         page: Int = 1,
         limit: Int = 10
@@ -48,7 +46,6 @@ class BookingHistoryViewModel : ViewModel() {
         if (_isLoading.value) return
 
         currentUserId = userId
-        currentCategory = category
         currentStatus = status
         currentPage = page
 
@@ -61,7 +58,6 @@ class BookingHistoryViewModel : ViewModel() {
                     userId = userId,
                     page = page,
                     limit = limit,
-                    category = category,
                     status = status
                 )
 
@@ -82,10 +78,10 @@ class BookingHistoryViewModel : ViewModel() {
                         )
                     }
                 } else {
-                    _error.value = response.body()?.error ?: "Error loading booking history"
+                    _error.value = response.body()?.error ?: "Errore durante il caricamento"
                 }
             } catch (e: Exception) {
-                _error.value = e.message ?: "Network error occurred"
+                _error.value = e.message ?: "Errore di rete"
             } finally {
                 _isLoading.value = false
             }
@@ -97,7 +93,6 @@ class BookingHistoryViewModel : ViewModel() {
             currentUserId?.let { userId ->
                 loadBookingHistory(
                     userId = userId,
-                    category = currentCategory,
                     status = currentStatus,
                     page = currentPage + 1
                 )
@@ -110,7 +105,6 @@ class BookingHistoryViewModel : ViewModel() {
             currentUserId?.let { userId ->
                 loadBookingHistory(
                     userId = userId,
-                    category = currentCategory,
                     status = currentStatus,
                     page = currentPage - 1
                 )
@@ -118,13 +112,20 @@ class BookingHistoryViewModel : ViewModel() {
         }
     }
 
+    fun refresh(userId: String) {
+        loadBookingHistory(userId, currentStatus, 1)
+    }
+
     fun filterByStatus(userId: String, status: String) {
-        loadBookingHistory(userId, null, status, 1)
+        loadBookingHistory(userId, status, 1)
     }
 
     fun clearFilters(userId: String) {
-        currentCategory = null
         currentStatus = null
-        loadBookingHistory(userId, null, null, 1)
+        loadBookingHistory(userId, null, 1)
+    }
+
+    fun clearError() {
+        _error.value = null
     }
 }
