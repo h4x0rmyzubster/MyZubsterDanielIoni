@@ -2,13 +2,13 @@
 
 We welcome contributions! 
 
-- 🟣 [**Good First Issues**](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/labels/good%20first%20issue) - Perfect for newcomers
-- 🟢 [**Help Wanted**](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/labels/help%20wanted) - Need extra help
+- 🟣 [**Good First Issues**](https://github.com/DanielIoni-creator/MyZubsterAPP/labels/good%20first%20issue) - Perfect for newcomers
+- 🟢 [**Help Wanted**](https://github.com/DanielIoni-creator/MyZubsterAPP/labels/help%20wanted) - Need extra help
 
 Check our [Contributing Guide](CONTRIBUTING.md) to get started!
 
-[![Good First Issues](https://img.shields.io/github/issues/h4x0rmyzubster/MyZubsterh4x0r/good%20first%20issue.svg)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/labels/good%20first%20issue)
-[![Help Wanted](https://img.shields.io/github/issues/h4x0rmyzubster/MyZubsterh4x0r/help%20wanted.svg)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/labels/help%20wanted)
+[![Good First Issues](https://img.shields.io/github/issues/DanielIoni-creator/MyZubsterAPP/good%20first%20issue.svg)](https://github.com/DanielIoni-creator/MyZubsterAPP/labels/good%20first%20issue)
+[![Help Wanted](https://img.shields.io/github/issues/DanielIoni-creator/MyZubsterAPP/help%20wanted.svg)](https://github.com/DanielIoni-creator/MyZubsterAPP/labels/help%20wanted)
 
 ---
 
@@ -33,18 +33,18 @@ MyZubster is now available as a **SaaS (Software as a Service)** platform with:
 [![Android](https://img.shields.io/badge/Platform-Android-brightgreen)](https://developer.android.com/)
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.9-purple)](https://kotlinlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-20+-green)](https://nodejs.org/)
-[![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/actions)
+[![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen)](https://github.com/DanielIoni-creator/MyZubsterAPP/actions)
 [![Open Source](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-red)](https://opensource.org/)
 
 ## 🏷️ Badges
 
-[![GitHub stars](https://img.shields.io/github/stars/h4x0rmyzubster/MyZubsterh4x0r.svg?style=social)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/h4x0rmyzubster/MyZubsterh4x0r.svg?style=social)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/h4x0rmyzubster/MyZubsterh4x0r.svg)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/h4x0rmyzubster/MyZubsterh4x0r.svg)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/pulls)
-[![License](https://img.shields.io/github/license/h4x0rmyzubster/MyZubsterh4x0r.svg)](LICENSE)
-[![Contributors](https://img.shields.io/github/contributors/h4x0rmyzubster/MyZubsterh4x0r.svg)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/graphs/contributors)
-[![GitHub last commit](https://img.shields.io/github/last-commit/h4x0rmyzubster/MyZubsterh4x0r.svg)](https://github.com/h4x0rmyzubster/MyZubsterh4x0r/commits/main)
+[![GitHub stars](https://img.shields.io/github/stars/DanielIoni-creator/MyZubsterAPP.svg?style=social)](https://github.com/DanielIoni-creator/MyZubsterAPP/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/DanielIoni-creator/MyZubsterAPP.svg?style=social)](https://github.com/DanielIoni-creator/MyZubsterAPP/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/DanielIoni-creator/MyZubsterAPP.svg)](https://github.com/DanielIoni-creator/MyZubsterAPP/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/DanielIoni-creator/MyZubsterAPP.svg)](https://github.com/DanielIoni-creator/MyZubsterAPP/pulls)
+[![License](https://img.shields.io/github/license/DanielIoni-creator/MyZubsterAPP.svg)](LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/DanielIoni-creator/MyZubsterAPP.svg)](https://github.com/DanielIoni-creator/MyZubsterAPP/graphs/contributors)
+[![GitHub last commit](https://img.shields.io/github/last-commit/DanielIoni-creator/MyZubsterAPP.svg)](https://github.com/DanielIoni-creator/MyZubsterAPP/commits/main)
 
 ---
 
@@ -67,7 +67,7 @@ MyZubster applies a **2% platform fee** on all transactions to support:
 
 The fee is **automatically applied** via smart contract and cannot be removed on the official SaaS platform.
 
-**Fee Wallet:** Maintained by Daniel Ioni (h4x0rmyzubster)
+**Fee Wallet:** Maintained by Daniel Ioni (DanielIoni-creator)
 
 For self-hosted versions, the fee can be modified or removed.
 
@@ -171,8 +171,8 @@ Prerequisites
 Clone the repository
 bash
 
-git clone https://github.com/h4x0rmyzubster/MyZubsterh4x0r.git
-cd MyZubsterh4x0r
+git clone https://github.com/DanielIoni-creator/MyZubsterAPP.git
+cd MyZubsterAPP
 
 Backend Setup
 bash
@@ -357,4 +357,4 @@ SPDX-License-Identifier: MIT OR GPL-3.0-or-later
 
 Explore the code, report issues, or start contributing today!
 
-Made with ❤️ by the MyZubster community
+Made with ❤️ by Daniel Ioni and the MyZubster community
