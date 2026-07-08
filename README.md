@@ -1,111 +1,111 @@
-✨ Key Features
-Core Features
+# MyZubster
 
-    🧑‍💼 User Profiles — Showcase skills you offer and list what you need.
+**MyZubster** is a full-stack community service platform connecting neighbors for services with built-in trust, safety, and privacy features.
 
-    💬 Messaging — Communicate safely with neighbors before confirming a transaction.
+---
 
-    📍 Location-Based Search — Find services close to you.
+## ✨ Key Features
 
-    ⭐ Reputation System — Two-way reviews build trust in the community.
+### Core Features
+- 👤 **User Profiles** — Showcase skills you offer and list what you need
+- 💬 **Messaging** — Communicate safely before confirming transactions
+- 📍 **Location-Based Search** — Find services close to you
+- ⭐ **Reputation System** — Two-way reviews build trust in the community
+- 🛡️ **Community Guidelines** — Safe and respectful environment
 
-    🛡️ Community Guidelines — A safe and respectful environment for everyone.
+### Advanced Features
+- 📅 **Booking System** — Schedule appointments with calendar and time slots
+- 📝 **Quotes & Estimates** — Professionals send quotes, clients accept/reject
+- 📋 **Complete Work History** — Track all completed jobs with details
+- 🔔 **Notifications** — Push for messages, quotes, and booking updates
+- 🛠️ **Admin Panel** — Moderation tools for reports, users, skills, activity logs
+- ✅ **Automated Testing** — Unit tests, API tests, and CI/CD with GitHub Actions
+- 🌍 **Internationalization** — Full English UI with additional language support
+- 🔄 **Dual Licensing** — MIT and GPLv3 licenses
+- 🪙 **Decentralized Fee System** — Smart contract-based fee management with governance
 
-Advanced Features
+### QR Code System
+- 📱 **Generate QR Codes** — For profiles, payments, and bookings
+- 📋 **Copy Address** — One-click copy to clipboard
+- 📤 **Share QR** — Share via any app
 
-    📅 Booking System — Schedule appointments with calendar and time slot selection.
+### Offline Mode
+- 💾 **Local Cache** — Data stored in memory and disk
+- 🗄️ **Room Database** — Persistent local storage with SQLite
+- 🔄 **Background Sync** — Automatic synchronization with WorkManager
+- ⚡ **Conflict Resolution** — Smart handling of data conflicts
+- 📶 **Offline Status UI** — Clear indication when offline
 
-    📝 Quotes & Estimates — Professionals can send quotes; clients can accept or reject them.
+### Error Handling
+- 🛡️ **Type-Safe Errors** — Sealed class hierarchy for all error types
+- 🌐 **Network Error Mapping** — HTTP status codes to user-friendly messages
+- 📱 **User-Friendly Messages** — Clear, localized error messages
 
-    📋 Complete Work History — Track all completed jobs with detailed information.
+---
 
-    🔔 Notifications — Push notifications for messages, quotes, and booking updates.
+## 🏗️ Tech Stack
 
-    🛠️ Admin Panel — Moderation tools for reports, users, skills, and activity logs.
+| Layer | Technology |
+|-------|------------|
+| **Mobile** | Kotlin, Android SDK, Retrofit, Material Design |
+| **Backend** | Node.js, Express, MongoDB, JWT, bcrypt |
+| **Blockchain** | Solidity, Hardhat, Web3.js, OpenZeppelin |
+| **Payments** | Monero RPC, Escrow, 2% Fee Service |
+| **Local Storage** | Room Database (SQLite), SharedPreferences |
+| **Background Sync** | WorkManager |
+| **QR Code** | ZXing |
+| **Testing** | JUnit (Android), Jest (Backend), Hardhat (Contracts) |
+| **CI/CD** | GitHub Actions |
 
-    ✅ Automated Testing — Unit tests for Kotlin (Android), API tests for Node.js backend, and CI/CD with GitHub Actions.
+---
 
-    🌍 Internationalization — Full English UI and documentation, with support for additional languages.
+## 📸 Screenshots
 
-    🔄 Dual Licensing — MIT and GPLv3 licenses for maximum flexibility.
+### Registration Screen
+![Register Screen](screenshots/01_register_screen.png)
 
-    🪙 Decentralized Fee System — Smart contract-based fee management with governance.
+*Registration screen with Name, Email, Password, and Confirm Password fields.*
 
-🏗️ Tech Stack
-Layer	Technology
-Mobile	Kotlin, Android SDK, Retrofit, Material Design
-Backend	Node.js, Express, MongoDB, JWT, bcrypt
-Blockchain	Solidity, Hardhat, Web3.js, OpenZeppelin
-Payments	Monero RPC, Escrow, 2% Fee Service
-Fee Management	Decentralized Smart Contract (FeeManager)
-Bookings	Calendar-based scheduling with time slots
-Quotes	Professional-client estimate system
-Notifications	Firebase FCM / UnifiedPush (optional)
-AI (optional)	Groq, Gemini (for skill descriptions)
-Testing	JUnit (Android), Jest (Backend), Hardhat (Contracts)
-CI/CD	GitHub Actions (tests & build at every commit)
-Admin Panel	React + Material-UI (optional)
-Web Dashboard	React (for public interface)
-📱 Installation Guide
-Prerequisites
+*(More screenshots coming soon: Login, Home, Profile, QR Code, Offline Status)*
 
-    Android Studio (latest)
+---
 
-    Node.js 16+
+## 🚀 Quick Start
 
-    MongoDB
+### Prerequisites
+- Android Studio (latest)
+- Node.js 16+
+- MongoDB
+- Monero wallet RPC (for testing payments)
 
-    Monero wallet RPC (for testing payments)
+### Clone & Install
 
-Clone the repository
-bash
-
+```bash
+# Clone the repository
 git clone https://github.com/DanielIoni-creator/MyZubsterAPP.git
 cd MyZubsterAPP
 
-Backend Setup
-bash
-
+# Backend setup
 cd backend
 npm install
 cp .env.example .env
-# Edit .env with your MongoDB URI, Monero RPC URL, and API keys.
+# Edit .env with your credentials
 npm start
-# The backend will run on http://localhost:5000
 
-Smart Contract Setup (Optional)
-bash
+# Android App
+# Open project in Android Studio
+# Sync Gradle and build APK
+# Install on device or emulator
 
-cd backend
-npx hardhat compile
-npx hardhat run scripts/deploy.js --network hardhat
-# For local testing
-npx hardhat node
-npx hardhat run scripts/deploy.js --network localhost
-
-Android App
-bash
-
-# Open the project in Android Studio
-# Sync Gradle and build the APK
-# Install the APK on your device (or use an emulator)
-
-Web Dashboard (Optional)
-bash
-
+# Optional: Web Dashboard
 cd web-dashboard
 npm install
 npm start
-# Runs on http://localhost:3000
 
-Admin Panel (Optional)
-bash
-
+# Optional: Admin Panel
 cd admin-panel
 npm install
 npm start
-# Runs on http://localhost:3001
-
 🧪 Testing
 bash
 
@@ -117,82 +117,21 @@ npm test
 cd backend
 npx hardhat test
 
-# Android tests (in Android Studio or terminal)
+# Android tests
 ./gradlew test
 
-# All tests with GitHub Actions (automated on every push)
+# All tests with GitHub Actions (automated on every commit)
 
-📅 Booking System
+📱 Installation
 
-MyZubster includes a complete booking system:
-Feature	Description
-Calendar View	Select available dates for services
-Time Slots	Choose from predefined time slots
-Booking Status	Track status: pending, confirmed, in_progress, completed, cancelled
-Automatic Scheduling	Prevent double bookings with conflict detection
+    Download APK from Releases
 
-Flow:
+    Enable "Install from unknown sources" in Android settings
 
-    Client selects a service and views available slots
+    Open the APK file and tap "Install"
 
-    Client chooses a date and time
+    Launch the app and create your account
 
-    Booking is created with status 'pending'
-
-    Professional receives notification and can confirm
-
-📝 Quotes & Estimates System
-Feature	Description
-Send Quote	Professionals can send an amount and description for a service
-Accept/Reject	Clients can accept or reject quotes
-Automatic Booking Update	Accepted quotes automatically confirm the booking
-Quote History	Track all sent and received quotes
-
-Flow:
-
-    Professional sends a quote with amount and description
-
-    Client receives notification and reviews the quote
-
-    Client accepts or rejects the quote
-
-    Booking status updates accordingly
-
-📋 Work History
-Feature	Description
-Complete History	View all completed jobs
-Infinite Scroll	Load more history as you scroll
-Job Details	See service title, category, professional, amount, and date
-Filtering	Filter by category and status
-🛡️ Escrow System
-Status	Description
-Pending	Escrow request created, waiting for funding
-Funded	Funds locked in escrow, work in progress
-Completed	Work completed, waiting for client confirmation
-Released	Funds released to the professional
-Disputed	Dispute opened, waiting for resolution
-
-Flow:
-
-    Client accepts the quote and sends XMR
-
-    2% fee is deducted automatically
-
-    Funds are locked in escrow
-
-    Professional completes the work
-
-    Client confirms completion
-
-    Funds are released to the professional (minus 2% fee)
-
-🛠️ Admin Panel
-Feature	Description	Role
-Reports	View and manage user reports	Moderator
-Users	List, filter, suspend/activate users	Admin
-Skills	Approve or reject skill listings	Moderator
-Stats	Dashboard with platform statistics	Moderator
-Logs	Audit trail of all moderation actions	Admin
 🤝 How to Contribute
 
 We welcome contributors of all experience levels!
@@ -203,12 +142,12 @@ We welcome contributors of all experience levels!
 
     Make your changes and test them
 
-    Submit a Pull Request with a clear description of your work
+    Submit a Pull Request with a clear description
 
 See CONTRIBUTING.md for detailed guidelines.
 💰 Contributor Rewards
 
-Contributors can earn 10% of the platform fee generated by their contributions!
+Earn 10% of the platform fee generated by your contributions!
 
     ✅ Pull requests merged
 
@@ -230,38 +169,67 @@ How it works:
 
 🛡️ Security & Privacy
 
-    Backend uses environment variables for sensitive data; never commit .env files
+    🔒 Environment Variables — Never commit .env files
 
-    All communication between client and server is encrypted via HTTPS
+    🔐 HTTPS — All communication encrypted
 
-    Push notifications support Firebase FCM
+    📱 FCM — Push notifications support
 
-    Admin Panel uses role-based access control (Admin/Moderator)
+    🛡️ Role-Based Access — Admin/Moderator control
 
-    Monero payments are non-custodial — private keys never leave the user's device
+    🔑 Non-Custodial Payments — Private keys never leave user's device
 
-    Escrow uses Monero multisig for secure fund locking
+    🔗 Monero Multisig — Secure fund locking in escrow
 
-    Smart contracts are audited and open source
+    ✅ Audited Smart Contracts — Open source and audited
 
 If you find a security issue, please contact the maintainer privately.
 📄 License
 
-This project is licensed under either the MIT License or the GNU General Public License v3.0, at your option.
+This project is dual-licensed under:
+
+    MIT License — Maximum flexibility
+
+    GNU General Public License v3.0 — Copyleft protection
 
 SPDX-License-Identifier: MIT OR GPL-3.0-or-later
 🙏 Acknowledgments
 
     Monero for privacy-first digital cash
 
-    All open-source libraries and contributors who make this project possible
+    All open-source libraries and contributors
 
     The community for feedback and support
 
-    The Ethereum and Hardhat communities for smart contract tooling
+    Ethereum and Hardhat communities for smart contract tooling
 
-🚀 Ready to join the community?
+📊 Project Status
+Metric	Value
+Stars	1
+Releases	5 (Latest: Beta 5)
+Commits	120+
+Contributors	1
+Languages	Kotlin, Java, JavaScript, HTML, CSS
+🚀 Roadmap
 
-Explore the code, report issues, or start contributing today!
+Coming Soon:
+
+    Enhanced AI integration for skill descriptions
+
+    Advanced analytics dashboard
+
+    Mobile wallet integration
+
+    Multi-language support expansion
+
+    Community governance features
+
+📬 Get Involved
+
+    GitHub: DanielIoni-creator/MyZubsterAPP
+
+    Issues: Report bugs and request features
+
+    Discussions: Join the community conversation
 
 Made with ❤️ by the MyZubster community
