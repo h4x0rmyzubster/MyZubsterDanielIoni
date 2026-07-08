@@ -4,16 +4,24 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
-import com.myzbuster.app.database.dao.UserDao
-import com.myzbuster.app.database.entities.CachedUser
+import com.myzbuster.app.database.dao.*
+import com.myzbuster.app.database.entities.*
 
 @Database(
-    entities = [CachedUser::class],
-    version = 1,
+    entities = [
+        CachedUser::class,
+        CachedBooking::class,
+        CachedQuote::class,
+        CachedNotification::class
+    ],
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun bookingDao(): BookingDao
+    abstract fun quoteDao(): QuoteDao
+    abstract fun notificationDao(): NotificationDao
     
     companion object {
         @Volatile
