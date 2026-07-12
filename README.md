@@ -57,14 +57,8 @@
 
 ## 📸 Screenshots
 
-### Registrazione
-![Registrazione](screenshots/register.png)
-
 ### Login
 ![Login](screenshots/login.png)
-
-### Home (Utente non loggato)
-![Home Esterna](screenshots/home-esterna.png)
 
 ### Home (Utente loggato)
 ![Home Interna](screenshots/home-interna.png)
