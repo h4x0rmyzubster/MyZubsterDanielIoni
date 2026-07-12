@@ -57,17 +57,20 @@
 
 ## 📸 Screenshots
 
-### Profile Page with Skills
-![Profile Page](screenshots/profile.png)
+### Registrazione
+![Registrazione](screenshots/register.png)
 
-### Registration Page
-![Registration](screenshots/registration.png)
-
-### Login Page
+### Login
 ![Login](screenshots/login.png)
 
-### Home Dashboard
-![Home](screenshots/home.png)
+### Home (Utente non loggato)
+![Home Esterna](screenshots/home-esterna.png)
+
+### Home (Utente loggato)
+![Home Interna](screenshots/home-interna.png)
+
+### Profilo Utente con Competenze
+![Profilo](screenshots/profile.png)
 
 ## 🚀 Quick Start
 
@@ -103,7 +106,6 @@ npm start
 cd admin-panel
 npm install
 npm start
-
 Docker Setup (Recommended)
 bash
 
