@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Profile from './pages/Profile'; // 👈 AGGIUNGI QUESTA RIGA
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/profile" element={<Profile />} /> {/* 👈 AGGIUNGI QUESTA RIGA */}
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </Router>

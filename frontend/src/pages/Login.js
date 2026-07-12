@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { login } from '../services/authService';
 
 const Login = () => {
-    const navigate = useNavigate();
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -21,31 +20,41 @@ const Login = () => {
         console.log('🔐 Tentativo di login:', formData);
 
         try {
-            const result = await login(formData);
-            console.log('📦 Risultato login:', result);
+            const response = await login(formData);
+            console.log('📦 Risposta COMPLETA:', response);
 
-            if (result && result.success === true && result.data) {
-                const { token, user } = result.data;
-                
-                if (token) {
+            // --- FORZA IL SALVATAGGIO ---
+            // Il backend risponde con: { success: true, data: { user: {...}, token: "..." } }
+            if (response && response.success === true && response.data) {
+                const { user, token } = response.data;
+                console.log('👤 Utente:', user);
+                console.log('🔑 Token:', token);
+
+                if (user && token) {
+                    // Salvataggio in localStorage
                     localStorage.setItem('token', token);
                     localStorage.setItem('user', JSON.stringify(user));
-                    console.log('✅ Login riuscito, redirect alla home');
-                    navigate('/');
+                    
+                    console.log('✅ Token salvato:', localStorage.getItem('token'));
+                    console.log('✅ User salvato:', localStorage.getItem('user'));
+                    
+                    // Redirect forzato alla home
+                    window.location.href = '/';
+                    return;
                 } else {
-                    setError('Token non ricevuto dal server');
+                    console.error('❌ Token o user mancanti');
+                    setError('Token o utente non ricevuti');
                 }
             } else {
+                console.error('❌ Risposta inaspettata:', response);
                 setError('Risposta dal server non valida');
             }
         } catch (err) {
             console.error('❌ Errore login:', err);
             if (err.response?.data?.error) {
                 setError(err.response.data.error);
-            } else if (err.response?.data?.message) {
-                setError(err.response.data.message);
             } else {
-                setError('Errore durante il login. Controlla le credenziali.');
+                setError('Errore durante il login. Riprova.');
             }
         } finally {
             setLoading(false);

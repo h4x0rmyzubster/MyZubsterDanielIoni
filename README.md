@@ -1,10 +1,10 @@
-# MyZubster
+# MyZubster - Skill Exchange Platform with Monero
 
-**MyZubster** is a full-stack community service platform connecting neighbors for services with built-in trust, safety, and privacy features.
+![MyZubster Logo](https://via.placeholder.com/200x100?text=MyZubster)
 
----
+**MyZubster** is a full-stack community service platform that connects neighbors for skill exchange (plumber, hairdresser, IT technician, etc.) using **Monero (XMR)** as the exchange currency, ensuring privacy and security in every transaction.
 
-## ✨ Key Features
+## 🚀 Key Features
 
 ### Core Features
 - 👤 **User Profiles** — Showcase skills you offer and list what you need
@@ -41,9 +41,7 @@
 - 🌐 **Network Error Mapping** — HTTP status codes to user-friendly messages
 - 📱 **User-Friendly Messages** — Clear, localized error messages
 
----
-
-## 🏗️ Tech Stack
+## 🛠️ Tech Stack
 
 | Layer | Technology |
 |-------|------------|
@@ -57,29 +55,28 @@
 | **Testing** | JUnit (Android), Jest (Backend), Hardhat (Contracts) |
 | **CI/CD** | GitHub Actions |
 
----
-
 ## 📸 Screenshots
 
-### Registration Screen
-![Register Screen](screenshots/01_register_screen.png)
+### Profile Page with Skills
+![Profile Page](screenshots/profile.png)
 
-*Registration screen with Name, Email, Password, and Confirm Password fields.*
+### Registration Page
+![Registration](screenshots/registration.png)
 
-*(More screenshots coming soon: Login, Home, Profile, QR Code, Offline Status)*
+### Login Page
+![Login](screenshots/login.png)
 
----
+### Home Dashboard
+![Home](screenshots/home.png)
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Android Studio (latest)
 - Node.js 16+
-- MongoDB
+- MongoDB (or use the in-memory mock)
 - Monero wallet RPC (for testing payments)
 
 ### Clone & Install
-
 ```bash
 # Clone the repository
 git clone https://github.com/DanielIoni-creator/MyZubsterAPP.git
@@ -106,6 +103,23 @@ npm start
 cd admin-panel
 npm install
 npm start
+
+Docker Setup (Recommended)
+bash
+
+# Start the entire stack with Docker
+docker-compose up -d
+
+Environment Variables
+
+Create a .env file in the backend folder:
+env
+
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/myzubster
+JWT_SECRET=your_super_secret_key
+MONERO_RPC_URL=http://localhost:18083
+
 🧪 Testing
 bash
 
@@ -138,7 +152,7 @@ We welcome contributors of all experience levels!
 
     Fork the repository
 
-    Create a feature branch
+    Create a feature branch (git checkout -b feature/amazing-feature)
 
     Make your changes and test them
 
@@ -206,24 +220,9 @@ SPDX-License-Identifier: MIT OR GPL-3.0-or-later
 📊 Project Status
 Metric	Value
 Stars	1
-Releases	5 (Latest: Beta 5)
-Commits	120+
+Releases	5
 Contributors	1
 Languages	Kotlin, Java, JavaScript, HTML, CSS
-🚀 Roadmap
-
-Coming Soon:
-
-    Enhanced AI integration for skill descriptions
-
-    Advanced analytics dashboard
-
-    Mobile wallet integration
-
-    Multi-language support expansion
-
-    Community governance features
-
 📬 Get Involved
 
     GitHub: DanielIoni-creator/MyZubsterAPP
