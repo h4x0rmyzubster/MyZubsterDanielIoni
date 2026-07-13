@@ -6,13 +6,11 @@
 
 ## 🌐 Live Site
 
-The project is currently live at:
+The project is fully live at:
 
 👉 **[https://my-zubster-app.vercel.app](https://my-zubster-app.vercel.app)**
 
-> **Note:** The backend is currently running locally. For full functionality from any device, the backend needs to be deployed to a cloud platform (Render, Cyclic.sh, etc.).
-
----
+Both frontend and backend are deployed and fully functional.
 
 ## 📋 Features
 
