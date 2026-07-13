@@ -5,23 +5,27 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/database');
 const orderRoutes = require('./routes/orders');
-const authRoutes = require('./routes/auth'); // 👈 Aggiunto: route autenticazione
+const authRoutes = require('./routes/auth');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 console.log('🔄 Avvio server...');
 
-// Middleware
+// ========== CORS CONFIGURAZIONE ==========
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || '*',
-  credentials: true
+  origin: ['https://my-zubster-app.vercel.app', 'http://localhost:3000', 'http://localhost:3001'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// ========== MIDDLEWARE ==========
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 
 // ========== ROTTE ==========
-app.use('/api/auth', authRoutes);    // 👈 Nuova rotta per autenticazione
+app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
 
 // Health check
@@ -34,18 +38,6 @@ app.get('/api/health', (req, res) => {
     blockchain: {
       web3: process.env.WEB3_PROVIDER,
       feeContract: process.env.FEE_CONTRACT_ADDRESS
-    }
-  });
-});
-
-app.get('/', (req, res) => {
-  res.json({
-    message: 'MyZubster Backend API',
-    version: '1.0.0',
-    endpoints: {
-      auth: '/api/auth',
-      orders: '/api/orders',
-      health: '/api/health'
     }
   });
 });
