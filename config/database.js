@@ -3,44 +3,57 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    // Costruisci URI: prima senza auth (locale) o con auth se specificata
-    const dbName = process.env.MONGO_DB || 'myzubster';
-    let uri = `mongodb://localhost:27017/${dbName}`;
+    // 1. PRIORITÀ ASSOLUTA alla variabile d'ambiente (per Render)
+    let uri = process.env.MONGODB_URI;
 
-    // Se ci sono credenziali, prova ad usarle (ma solo se non è localhost senza auth)
-    if (process.env.MONGO_USER && process.env.MONGO_PASSWORD) {
-      // Prova prima senza auth (perché di default su Windows non c'è)
+    // 2. Se NON esiste (sviluppo locale), usa il fallback
+    if (!uri) {
+      console.log('🔄 MONGODB_URI non trovata, uso configurazione locale...');
+      
+      const dbName = process.env.MONGO_DB || 'myzubster';
+      let localUri = `mongodb://localhost:27017/${dbName}`;
+
+      // Prova prima senza autenticazione
       try {
         console.log('🔄 Tentativo connessione senza autenticazione...');
-        await mongoose.connect(uri, {
+        await mongoose.connect(localUri, {
           useNewUrlParser: true,
           useUnifiedTopology: true,
           serverSelectionTimeoutMS: 2000
         });
         console.log('✅ MongoDB connesso (senza autenticazione)');
+        console.log(`📊 Database: ${mongoose.connection.name}`);
         return;
       } catch (err) {
-        console.log('🔄 Tentativo con autenticazione...');
-        // Se fallisce, usa le credenziali
-        uri = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@localhost:27017/${dbName}?authSource=admin`;
-        await mongoose.connect(uri, {
-          useNewUrlParser: true,
-          useUnifiedTopology: true,
-          serverSelectionTimeoutMS: 5000
-        });
-        console.log('✅ MongoDB connesso (con autenticazione)');
+        // Se fallisce, prova con autenticazione
+        if (process.env.MONGO_USER && process.env.MONGO_PASSWORD) {
+          console.log('🔄 Tentativo con autenticazione...');
+          localUri = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@localhost:27017/${dbName}?authSource=admin`;
+          await mongoose.connect(localUri, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 5000
+          });
+          console.log('✅ MongoDB connesso (con autenticazione)');
+          console.log(`📊 Database: ${mongoose.connection.name}`);
+          return;
+        }
+        // Se tutto fallisce, rilancio l'errore
+        throw err;
       }
-    } else {
-      // Senza credenziali
-      await mongoose.connect(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        serverSelectionTimeoutMS: 5000
-      });
-      console.log('✅ MongoDB connesso (senza autenticazione)');
     }
 
+    // 3. Connessione con MONGODB_URI (Render)
+    console.log('🔄 Connessione a MongoDB Atlas via MONGODB_URI...');
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000,
+    });
+
+    console.log(`✅ MongoDB connesso: ${mongoose.connection.host}`);
     console.log(`📊 Database: ${mongoose.connection.name}`);
+
   } catch (error) {
     console.error('❌ Errore MongoDB:', error.message);
     if (process.env.NODE_ENV !== 'test') {
