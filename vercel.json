@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/web-dashboard/build/index.html" }
+  ],
+  "builds": [
+    { "src": "web-dashboard/**", "use": "@vercel/static-build" }
+  ]
+}
