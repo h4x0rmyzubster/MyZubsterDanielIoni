@@ -8,6 +8,26 @@
 
 ---
 
+## 💰 Monero Payment Integration
+
+MyZubster supports **real Monero (XMR) payments** on testnet (and soon mainnet). The system uses:
+
+- **Monero Wallet RPC** for wallet management
+- **Subaddress generation** for unique payment addresses per order
+- **Automatic payment monitoring** with 10-block confirmation (≈20 min)
+- **2% fee** automatically deducted from each payment
+
+### Configuration
+
+To enable Monero payments, set in `.env`:
+
+```env
+USE_REAL_MONERO=true
+MONERO_RPC_URL=http://127.0.0.1:28083
+MONERO_RPC_LOGIN=fee_rpc:rpc_password
+MONERO_NETWORK=testnet
+MONERO_FEE_PERCENT=2
+
 ## 🌐 Live Site
 
 The project is fully live at:
