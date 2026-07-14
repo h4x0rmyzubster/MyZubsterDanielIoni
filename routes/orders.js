@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const orderController = require('../controllers/orderController');
-const { authenticate } = require('../middleware/auth'); // 👈 Importa il middleware
+const { authenticate } = require('../middleware/auth');
 
 // POST /api/orders - Crea nuovo ordine (protetto)
 router.post('/', authenticate, orderController.createOrder);
