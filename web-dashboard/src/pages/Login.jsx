@@ -1,7 +1,7 @@
 // src/pages/Login.jsx
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { login, register } from '../services/api';
+import { login, register, fetchCsrfToken } from '../services/api';
 
 const Login = ({ onLogin }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -15,6 +15,9 @@ const Login = ({ onLogin }) => {
     setLoading(true);
 
     try {
+      // Ottieni CSRF token prima di ogni richiesta di autenticazione
+      await fetchCsrfToken();
+
       let response;
       if (isLogin) {
         response = await login(email, password);
@@ -27,6 +30,10 @@ const Login = ({ onLogin }) => {
       const { token, user } = response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
+      
+      // Ottieni un nuovo CSRF token dopo il login
+      await fetchCsrfToken();
+      
       onLogin(user);
     } catch (err) {
       const errorMsg = err.response?.data?.error || 'Errore di autenticazione';

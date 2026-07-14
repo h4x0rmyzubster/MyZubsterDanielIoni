@@ -2,7 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { QRCodeSVG } from 'qrcode.react';
-import { getOrders, createOrder, startPayment, getPaymentStatus, cancelOrder } from '../services/api';
+import { 
+  getOrders, 
+  createOrder, 
+  startPayment, 
+  getPaymentStatus, 
+  cancelOrder,
+  fetchCsrfToken 
+} from '../services/api';
 
 const Dashboard = ({ user, onLogout }) => {
   const [orders, setOrders] = useState([]);
@@ -22,6 +29,8 @@ const Dashboard = ({ user, onLogout }) => {
 
   const loadOrders = async () => {
     try {
+      // Assicura che il CSRF token sia disponibile
+      await fetchCsrfToken();
       const response = await getOrders();
       setOrders(response.data.orders || []);
     } catch (error) {
@@ -39,6 +48,7 @@ const Dashboard = ({ user, onLogout }) => {
     }
     setCreating(true);
     try {
+      await fetchCsrfToken(); // Rinnova token prima di creare
       const response = await createOrder(
         newOrder.items,
         newOrder.total,
@@ -61,10 +71,10 @@ const Dashboard = ({ user, onLogout }) => {
   const handleStartPayment = async (orderId, amount) => {
     setPaying(true);
     try {
+      await fetchCsrfToken();
       const response = await startPayment(orderId, amount);
       const payment = response.data.payment;
       
-      // Mostra il modal con i dettagli del pagamento
       setSelectedPayment({
         ...payment,
         orderId: orderId,
@@ -75,7 +85,6 @@ const Dashboard = ({ user, onLogout }) => {
       
       toast.info(`Pagamento avviato! Invia ${payment.amount} XMR al seguente indirizzo.`);
       
-      // Avvia il monitoraggio in background (ogni 10 secondi per 10 minuti)
       let attempts = 0;
       const maxAttempts = 60;
       
@@ -91,7 +100,6 @@ const Dashboard = ({ user, onLogout }) => {
             setPaying(false);
             return;
           } else if (statusRes.data.status === 'pending') {
-            // Aggiorna il modal con lo stato corrente
             setSelectedPayment(prev => ({
               ...prev,
               confirmations: statusRes.data.confirmations || 0,
@@ -103,7 +111,7 @@ const Dashboard = ({ user, onLogout }) => {
         }
         
         if (attempts < maxAttempts) {
-          setTimeout(checkPaymentStatus, 10000); // Riprova tra 10 secondi
+          setTimeout(checkPaymentStatus, 10000);
         } else {
           toast.info('⏳ Il pagamento richiede ~20 minuti. Controlla più tardi.');
           setPaying(false);
@@ -125,6 +133,7 @@ const Dashboard = ({ user, onLogout }) => {
   const handleCancelOrder = async (orderId) => {
     if (!window.confirm('Annullare questo ordine?')) return;
     try {
+      await fetchCsrfToken();
       await cancelOrder(orderId);
       toast.success('Ordine annullato!');
       await loadOrders();
@@ -210,7 +219,6 @@ const Dashboard = ({ user, onLogout }) => {
             </button>
           </div>
 
-          {/* Stato del pagamento */}
           {!isConfirmed && confirmations > 0 && (
             <div style={{
               background: '#f0fdf4',
@@ -276,7 +284,6 @@ const Dashboard = ({ user, onLogout }) => {
               )}
             </div>
 
-            {/* QR Code */}
             {!isConfirmed && (
               <div style={{
                 background: 'white',
@@ -294,7 +301,6 @@ const Dashboard = ({ user, onLogout }) => {
               </div>
             )}
 
-            {/* Indirizzo */}
             {!isConfirmed && (
               <div style={{
                 marginTop: '15px',

@@ -11,16 +11,61 @@ const api = axios.create({
   },
 });
 
-// Interceptor per il token
+// ========== CSRF TOKEN MANAGEMENT ==========
+let csrfToken = localStorage.getItem('csrfToken');
+
+export const fetchCsrfToken = async () => {
+  try {
+    const response = await api.get('/csrf-token');
+    csrfToken = response.data.csrfToken;
+    localStorage.setItem('csrfToken', csrfToken);
+    return csrfToken;
+  } catch (error) {
+    console.error('Errore recupero CSRF token:', error);
+    return null;
+  }
+};
+
+// Interceptor per il token JWT
 api.interceptors.request.use(
-  (config) => {
+  async (config) => {
+    // Aggiungi token JWT
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
+    // Aggiungi CSRF token per richieste POST, PUT, DELETE
+    if (['post', 'put', 'delete', 'patch'].includes(config.method?.toLowerCase())) {
+      // Se non abbiamo il token, recuperalo
+      if (!csrfToken) {
+        await fetchCsrfToken();
+      }
+      if (csrfToken) {
+        config.headers['CSRF-Token'] = csrfToken;
+      }
+    }
+
     return config;
   },
   (error) => Promise.reject(error)
+);
+
+// Interceptor per gestire errori di CSRF
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    // Se il token CSRF è scaduto, rinnovalo e riprova
+    if (error.response?.status === 403 && error.response?.data?.error?.includes('CSRF')) {
+      console.log('🔄 CSRF token scaduto, rinnovo...');
+      await fetchCsrfToken();
+      // Riprova la richiesta originale
+      const config = error.config;
+      config.headers['CSRF-Token'] = csrfToken;
+      return api(config);
+    }
+    return Promise.reject(error);
+  }
 );
 
 // ========== AUTH ==========
@@ -32,6 +77,17 @@ export const login = (email, password) =>
 
 export const getProfile = () => 
   api.get('/auth/profile');
+
+export const refreshToken = async () => {
+  const refreshToken = localStorage.getItem('refreshToken');
+  if (!refreshToken) {
+    throw new Error('Refresh token non disponibile');
+  }
+  const response = await api.post('/auth/refresh', { refreshToken });
+  const { token } = response.data;
+  localStorage.setItem('token', token);
+  return token;
+};
 
 // ========== ORDERS ==========
 export const createOrder = (items, total, currency = 'XMR') => 
@@ -52,5 +108,8 @@ export const startPayment = (orderId, amount) =>
 
 export const getPaymentStatus = (paymentId) => 
   api.get(`/orders/payments/${paymentId}/status`);
+
+export const getPaymentDetails = (orderId) => 
+  api.get(`/orders/${orderId}/payment-details`);
 
 export default api;
