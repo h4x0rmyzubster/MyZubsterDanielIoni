@@ -77,3 +77,108 @@ backend/abis/
 backend/artifacts/
 backend/cache/
 frontend/node_modules/.cache/default-development/
+
+# =============================================
+# MONERO / TEST FILES
+# =============================================
+
+# Monero RPC test files
+*.json
+*.bat
+*.sh
+start-monero.bat
+stop-monero.bat
+
+# Monero wallet files (local)
+fee_wallet
+fee_wallet.keys
+fee_wallet.address.txt
+
+# Monero logs
+monero-*.log
+monero-wallet-*.log
+monero-wallet-cli.log
+monero-wallet-rpc.log
+
+# Monero data directory
+bitmonero/
+*.lmdb
+*.data.mdb
+*.lock.mdb
+
+# =============================================
+# TEST / TEMPORARY FILES
+# =============================================
+
+# Test files
+test-*.js
+test-*.json
+*-test.js
+*-test.json
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+*.backup
+
+# =============================================
+# OS / SYSTEM FILES
+# =============================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+.directory
+*.pid
+*.lock
+
+# =============================================
+# LOGS / REPORTS
+# =============================================
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Reports
+coverage/
+.nyc_output/
+*.lcov
+
+# =============================================
+# MISC
+# =============================================
+
+# Uploads
+uploads/
+temp/
+tmp/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Package manager
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
