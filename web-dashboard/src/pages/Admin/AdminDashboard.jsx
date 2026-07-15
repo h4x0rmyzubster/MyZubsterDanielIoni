@@ -1,6 +1,7 @@
 // src/pages/Admin/AdminDashboard.jsx
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import api from '../../services/api';
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
@@ -15,34 +16,28 @@ const AdminDashboard = () => {
 
   const fetchDashboard = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('/api/admin/dashboard', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const data = await response.json();
-      if (data.success) {
-        setStats(data.stats);
+      const response = await api.get('/admin/dashboard');
+      if (response.data.success) {
+        setStats(response.data.stats);
       } else {
-        toast.error(data.error || 'Errore caricamento dashboard');
+        toast.error(response.data.error || 'Errore caricamento dashboard');
       }
     } catch (error) {
+      console.error('Errore dashboard:', error);
       toast.error('Errore caricamento dashboard');
     }
   };
 
   const fetchOrders = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('/api/admin/orders?limit=20', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const data = await response.json();
-      if (data.success) {
-        setOrders(data.orders || []);
+      const response = await api.get('/admin/orders?limit=20');
+      if (response.data.success) {
+        setOrders(response.data.orders || []);
       } else {
-        toast.error(data.error || 'Errore caricamento ordini');
+        toast.error(response.data.error || 'Errore caricamento ordini');
       }
     } catch (error) {
+      console.error('Errore ordini:', error);
       toast.error('Errore caricamento ordini');
     } finally {
       setLoading(false);
@@ -53,23 +48,15 @@ const AdminDashboard = () => {
     if (updating) return;
     setUpdating(true);
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`/api/admin/orders/${orderId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ status })
-      });
-      const data = await response.json();
-      if (data.success) {
+      const response = await api.put(`/admin/orders/${orderId}`, { status });
+      if (response.data.success) {
         toast.success('Ordine aggiornato con successo');
         fetchOrders();
       } else {
-        toast.error(data.error || 'Errore aggiornamento ordine');
+        toast.error(response.data.error || 'Errore aggiornamento ordine');
       }
     } catch (error) {
+      console.error('Errore aggiornamento:', error);
       toast.error('Errore aggiornamento ordine');
     } finally {
       setUpdating(false);

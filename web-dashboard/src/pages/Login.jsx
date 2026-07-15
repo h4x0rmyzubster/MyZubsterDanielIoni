@@ -15,7 +15,6 @@ const Login = ({ onLogin }) => {
     setLoading(true);
 
     try {
-      // Ottieni CSRF token prima di ogni richiesta di autenticazione
       await fetchCsrfToken();
 
       let response;
@@ -27,13 +26,13 @@ const Login = ({ onLogin }) => {
         toast.success('Registrazione completata! 🎉');
       }
 
-      const { token, user } = response.data;
+      const { token, refreshToken, user } = response.data;
       localStorage.setItem('token', token);
+      localStorage.setItem('refreshToken', refreshToken);
       localStorage.setItem('user', JSON.stringify(user));
-      
-      // Ottieni un nuovo CSRF token dopo il login
+
       await fetchCsrfToken();
-      
+
       onLogin(user);
     } catch (err) {
       const errorMsg = err.response?.data?.error || 'Errore di autenticazione';

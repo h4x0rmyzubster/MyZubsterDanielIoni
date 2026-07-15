@@ -7,7 +7,9 @@ async function makeAdmin() {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
     
-    const email = 'test@example.com'; // Cambia con la tua email
+    // CAMBIA CON LA TUA EMAIL
+    const email = 'test@example.com';
+    
     const user = await User.findOneAndUpdate(
       { email },
       { role: 'admin' },
@@ -16,8 +18,11 @@ async function makeAdmin() {
     
     if (user) {
       console.log(`✅ Utente ${user.email} aggiornato a ADMIN`);
+      console.log(`   ID: ${user._id}`);
+      console.log(`   Ruolo: ${user.role}`);
     } else {
-      console.log(`❌ Utente con email ${email} non trovato. Registrati prima.`);
+      console.log(`❌ Utente con email ${email} non trovato.`);
+      console.log('   Registrati prima dal sito.');
     }
   } catch (error) {
     console.error('❌ Errore:', error.message);

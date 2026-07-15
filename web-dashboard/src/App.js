@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import AdminDashboard from './pages/Admin/AdminDashboard';
@@ -8,18 +8,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-// Componente per il logout
-const Logout = () => {
-  const navigate = useNavigate();
-  React.useEffect(() => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
-    navigate('/login');
-  }, [navigate]);
-  return null;
-};
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -45,9 +33,6 @@ function App() {
           {/* Route pubblica per login */}
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
 
-          {/* Route per il logout */}
-          <Route path="/logout" element={<Logout />} />
-
           {/* Route protetta per la dashboard */}
           <Route
             path="/dashboard"
@@ -58,7 +43,7 @@ function App() {
             }
           />
 
-          {/* Route protetta per admin */}
+          {/* ✅ Route protetta per admin (SOLO admin) */}
           <Route
             path="/admin"
             element={
@@ -84,7 +69,6 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
-        {/* Toast notifications */}
         <ToastContainer
           position="top-right"
           autoClose={3000}

@@ -10,6 +10,7 @@ import {
   cancelOrder,
   fetchCsrfToken 
 } from '../services/api';
+import { connectSocket, disconnectSocket, onSocketEvent } from '../services/socket';
 
 const Dashboard = ({ user, onLogout }) => {
   const [orders, setOrders] = useState([]);
@@ -23,13 +24,31 @@ const Dashboard = ({ user, onLogout }) => {
     total: 0 
   });
 
+  // Connessione WebSocket e caricamento ordini
   useEffect(() => {
     loadOrders();
-  }, []);
+
+    if (user?.id) {
+      connectSocket(user.id);
+
+      onSocketEvent('payment:confirmed', () => {
+        toast.success('✅ Pagamento ricevuto!');
+        loadOrders();
+      });
+
+      onSocketEvent('order:updated', (data) => {
+        toast.info(`📦 Ordine aggiornato: ${data.status}`);
+        loadOrders();
+      });
+
+      return () => {
+        disconnectSocket();
+      };
+    }
+  }, [user]);
 
   const loadOrders = async () => {
     try {
-      // Assicura che il CSRF token sia disponibile
       await fetchCsrfToken();
       const response = await getOrders();
       setOrders(response.data.orders || []);
@@ -48,7 +67,7 @@ const Dashboard = ({ user, onLogout }) => {
     }
     setCreating(true);
     try {
-      await fetchCsrfToken(); // Rinnova token prima di creare
+      await fetchCsrfToken();
       const response = await createOrder(
         newOrder.items,
         newOrder.total,
@@ -57,8 +76,7 @@ const Dashboard = ({ user, onLogout }) => {
       toast.success(`Ordine creato! ID: ${response.data.order.orderNumber}`);
       setNewOrder({ items: [{ name: '', quantity: 1, price: 0 }], total: 0 });
       await loadOrders();
-      
-      // Avvia automaticamente il pagamento
+
       const orderId = response.data.order.id;
       await handleStartPayment(orderId, newOrder.total);
     } catch (error) {
@@ -74,7 +92,7 @@ const Dashboard = ({ user, onLogout }) => {
       await fetchCsrfToken();
       const response = await startPayment(orderId, amount);
       const payment = response.data.payment;
-      
+
       setSelectedPayment({
         ...payment,
         orderId: orderId,
@@ -82,12 +100,12 @@ const Dashboard = ({ user, onLogout }) => {
         maxConfirmations: 10,
       });
       setShowPaymentModal(true);
-      
+
       toast.info(`Pagamento avviato! Invia ${payment.amount} XMR al seguente indirizzo.`);
-      
+
       let attempts = 0;
       const maxAttempts = 60;
-      
+
       const checkPaymentStatus = async () => {
         attempts++;
         try {
@@ -109,7 +127,7 @@ const Dashboard = ({ user, onLogout }) => {
         } catch (err) {
           console.log('Monitoraggio in corso...');
         }
-        
+
         if (attempts < maxAttempts) {
           setTimeout(checkPaymentStatus, 10000);
         } else {
@@ -117,9 +135,9 @@ const Dashboard = ({ user, onLogout }) => {
           setPaying(false);
         }
       };
-      
+
       setTimeout(checkPaymentStatus, 5000);
-      
+
     } catch (error) {
       toast.error(error.response?.data?.error || 'Errore pagamento');
       setPaying(false);
@@ -378,6 +396,11 @@ const Dashboard = ({ user, onLogout }) => {
         <h1>📦 MyZubster</h1>
         <div className="user-info">
           <span>👋 {user?.name || 'Utente'}</span>
+          {user?.role === 'admin' && (
+            <a href="/admin" style={{ marginRight: '16px', color: '#4f46e5', textDecoration: 'none' }}>
+              🛡️ Admin Panel
+            </a>
+          )}
           <button className="logout-btn" onClick={onLogout}>
             Logout
           </button>

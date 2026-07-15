@@ -1,12 +1,11 @@
 // src/components/ProtectedRoute.jsx
 import React, { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { fetchCsrfToken } from '../services/api';
+import { Navigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import { fetchCsrfToken } from '../services/api';
 
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -16,51 +15,43 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
 
     if (!token) {
       setIsAuthenticated(false);
-      setIsLoading(false);
+      setLoading(false);
       return;
     }
 
-    let userRole = user.role || 'user';
+    let userRole = 'user';
     try {
       const decoded = jwtDecode(token);
-      if (decoded.role) {
-        userRole = decoded.role;
-      }
+      userRole = decoded.role || 'user';
     } catch (e) {
-      console.error('Token non valido');
+      console.warn('Token non decodificabile:', e);
+      userRole = user.role || 'user';
     }
 
     if (requireAdmin && userRole !== 'admin') {
-      setIsAdmin(false);
       setIsAuthenticated(true);
-      setIsLoading(false);
+      setIsAdmin(false);
+      setLoading(false);
       return;
     }
 
     fetchCsrfToken()
       .then(() => {
         setIsAuthenticated(true);
-        if (requireAdmin) {
-          setIsAdmin(userRole === 'admin');
-        }
-        setIsLoading(false);
+        setIsAdmin(userRole === 'admin');
+        setLoading(false);
       })
       .catch(() => {
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('user');
         setIsAuthenticated(false);
-        setIsLoading(false);
-        navigate('/login');
+        setLoading(false);
       });
-  }, [navigate, requireAdmin]);
+  }, [requireAdmin]);
 
-  if (isLoading) {
-    return (
-      <div className="spinner-container">
-        <div className="spinner"></div>
-      </div>
-    );
+  if (loading) {
+    return <div className="spinner-container"><div className="spinner" /></div>;
   }
 
   if (!isAuthenticated) {

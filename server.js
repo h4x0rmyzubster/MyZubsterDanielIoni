@@ -49,9 +49,11 @@ app.use(cors({
     }
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'CSRF-Token']
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'CSRF-Token', 'Accept'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range']
 }));
+
 console.log('✅ CORS configurato');
 
 // ========== SECURITY HEADERS ==========
@@ -138,7 +140,7 @@ app.use((req, res, next) => {
 });
 console.log('✅ XSS sanitizzazione attiva');
 
-// ========== COOKIE PARSER (per CSRF) ==========
+// ========== COOKIE PARSER ==========
 app.use(cookieParser(process.env.COOKIE_SECRET || 'my-secret-key'));
 
 // ========== MIDDLEWARE ==========
@@ -185,7 +187,6 @@ app.get('/api/csrf-token', csrfProtection, (req, res) => {
 
 // ========== CSRF PROTECTION (escluso auth e admin) ==========
 app.use((req, res, next) => {
-  // Escludi le route auth e admin dal CSRF
   if (
     req.path.startsWith('/api/auth/') ||
     req.path.startsWith('/api/admin/')
@@ -198,7 +199,7 @@ app.use((req, res, next) => {
   }
   next();
 });
-console.log('✅ CSRF protection configurata (escluso auth e admin)');
+console.log('✅ CSRF protection configurata');
 
 // ========== SWAGGER DOCUMENTATION ==========
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
