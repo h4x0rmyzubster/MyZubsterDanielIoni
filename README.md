@@ -1,219 +1,215 @@
-# 🧩 MyZubster
+# MyZubster 🛒🔒
 
-**MyZubster** is a complete platform for managing orders and cryptocurrency payments (Monero/XMR), featuring a modern React frontend, a secure Node.js backend, and a comprehensive admin panel.
+**Self-hosted Monero payment integration with subaddresses**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Code of Conduct](https://img.shields.io/badge/Code%20of%20Conduct-1.0-blue.svg)](CODE_OF_CONDUCT.md)
+[![Node.js](https://img.shields.io/badge/Node.js-20.x-green.svg)](https://nodejs.org/)
+[![Monero](https://img.shields.io/badge/Monero-0.18.x-orange.svg)](https://www.getmonero.org/)
+[![Status](https://img.shields.io/badge/status-beta-blue.svg)]()
 
 ---
 
-## 🌐 Live Site
+## 📖 What is MyZubster?
 
-👉 **[https://my-zubster-app.vercel.app](https://my-zubster-app.vercel.app)**
+MyZubster is a **self-hosted Monero payment gateway** that generates unique **subaddresses** for each order. It's designed to be integrated into e-commerce platforms, SaaS apps, or any web application that wants to accept Monero (XMR) payments without relying on third-party services.
 
-> **Admin Panel:** [https://my-zubster-app.vercel.app/admin](https://my-zubster-app.vercel.app/admin)
-
----
-
-## 📋 Features
-
-### 🛡️ Admin Panel
-- 📊 **Dashboard statistics** – Total orders, paid, pending, revenue, users, conversion rate
-- 📋 **Order management** – View, filter, search, and update order status
-- 🔍 **Search & filters** – By order number, user email, or status
-- 📄 **Pagination** – Navigate through orders (10 per page)
-- 🔄 **Real-time updates** – WebSocket notifications for order changes
-
-### 👤 User Features
-- 🔐 **JWT Authentication** – Register/Login with refresh token rotation
-- 📦 **Order Management** – Full CRUD operations
-- 💳 **Payments** – Mock (auto-confirm) and Monero real payments
-- 📊 **User Dashboard** – Order history with real-time status updates
-- 🎨 **Modern UI** – Responsive, animations, toast notifications
-
-### 🔒 Security
-- 🛡️ **XSS Protection** – Input sanitization on all user inputs
-- 🔑 **CSRF Protection** – Token-based protection for state-changing requests
-- ⏱️ **Rate Limiting** – 10 attempts/15min on auth endpoints
-- 🛡️ **Helmet** – HTTP security headers
-- 🔗 **CORS** – Properly configured for production
-- 🔄 **JWT Refresh** – With token rotation and revocation
-
-### 💰 Monero Integration
-- 🔗 **Wallet RPC** – Full integration with Monero testnet
-- 🆔 **Subaddress generation** – Unique payment addresses per order
-- 🔍 **Automatic payment monitoring** – 10-block confirmation (~20 min)
-- 💸 **2% fee** – Automatically deducted from each payment
-- 📤 **Automatic transfer** – Net amount (98%) transferred to main wallet
-
-### 📡 WebSocket
-- 🔔 **Real-time notifications** – `payment:confirmed` and `order:updated` events
-- 🔄 **Automatic reconnection** – With queue management
-- 🔐 **User authentication** – Secure WebSocket connections
+**Key features:**
+- ✅ **Self-hosted** — no third-party services, full control
+- ✅ **Unique subaddresses** — each order gets its own Monero address
+- ✅ **Real-time exchange rate** — XMR/USD via CoinGecko API
+- ✅ **Automatic payment monitoring** — checks for incoming payments every 60 seconds
+- ✅ **REST API** — simple integration with any frontend
+- ✅ **Open source** — MIT license
 
 ---
 
-## 🛠️ Tech Stack
-
-| Component | Technology |
-| :--- | :--- |
-| **Frontend** | React 18, Axios, React Toastify, QRCode.react, Socket.IO Client |
-| **Backend** | Node.js, Express, JWT, Bcrypt, Socket.IO, Mongoose |
-| **Database** | MongoDB (Atlas Cloud) |
-| **Deploy** | Vercel (Frontend) / Render (Backend) / VPS (future) |
-| **Payments** | Monero (XMR) Testnet / Mock |
-| **Authentication** | JWT with Refresh Tokens |
-| **WebSocket** | Socket.IO for real-time updates |
-
----
-
-## 🚀 Local Development
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js (v20+)
-- MongoDB (local or Atlas)
-- npm or yarn
 
-### Backend
+- **Node.js** (v16+)
+- **Monero Wallet RPC** (monero-wallet-rpc)
+- **PostgreSQL** or **MongoDB** (optional, in-memory for testing)
+- **npm** or **yarn**
+
+### 1️⃣ Clone the repository
+
 ```bash
-npm install
-node server.js
-# http://localhost:5000
-Frontend
+git clone https://github.com/DanielIoni-creator/MyZubsterAPP.git
+cd MyZubsterAPP/backend
+2️⃣ Install dependencies
 bash
 
-cd web-dashboard
 npm install
+
+3️⃣ Configure environment variables
+
+Create a .env file from the example:
+bash
+
+cp .env.example .env
+
+Edit .env with your settings:
+env
+
+# Server
+PORT=3000
+NODE_ENV=development
+
+# Monero RPC
+MONERO_RPC_URL=http://localhost:18083
+MONERO_NETWORK=testnet
+MONERO_WALLET_PASSWORD=your_password
+
+# Security
+JWT_SECRET=your_jwt_secret_key
+
+4️⃣ Start the Monero Wallet RPC
+bash
+
+monero-wallet-rpc --wallet-file your_wallet --password your_password --rpc-bind-port 18083 --testnet --disable-rpc-login
+
+5️⃣ Start the backend
+bash
+
 npm start
-# http://localhost:3000
 
-Monero Wallet RPC (optional)
-bash
+The server will start on http://localhost:3000
+🔧 API Endpoints
+Create an Order
+http
 
-# Start monerod (testnet)
-./monerod --testnet --p2p-bind-port 28080 --rpc-bind-port 28081
+POST /api/orders
+Content-Type: application/json
 
-# Start wallet RPC
-./monero-wallet-rpc --testnet --wallet-file fee_wallet --password myzubster --rpc-bind-port 28083 --disable-rpc-login --daemon-port 28081
+{
+  "amount": 0.01,
+  "currency": "USD",
+  "customerEmail": "customer@example.com"
+}
 
-🌍 Project URLs
-Environment	URL
-Frontend (Production)	https://my-zubster-app.vercel.app
-Admin Panel	https://my-zubster-app.vercel.app/admin
-API Health Check	http://localhost:5000/api/health
-Swagger Docs	http://localhost:5000/api-docs
-WebSocket	ws://localhost:5000
-📌 Roadmap
-🟢 Completed (v1.0)
+Response:
+json
 
-    ✅ Admin Panel (dashboard, filters, search, pagination)
+{
+  "id": 1,
+  "amount": 0.01,
+  "currency": "USD",
+  "customerEmail": "customer@example.com",
+  "moneroAddress": "B... (unique subaddress)",
+  "moneroAmount": 0.00003022,
+  "addressIndex": 1,
+  "status": "pending",
+  "createdAt": "2026-07-16T09:28:59.151Z"
+}
 
-    ✅ WebSocket real-time notifications
+Get All Orders
+http
 
-    ✅ Monero testnet integration (subaddress, monitoring, fee)
+GET /api/orders
 
-    ✅ Security (XSS, CSRF, Rate Limiting, Helmet, CORS)
+Get Order by ID
+http
 
-    ✅ UI/UX (animations, responsive, loader)
+GET /api/orders/:id
 
-    ✅ JWT Authentication with refresh tokens
+Get Orders by Status
+http
 
-    ✅ Order management (CRUD)
+GET /api/orders/status/:status
 
-    ✅ Payment system (mock + Monero)
+Example: GET /api/orders/status/pending
+Health Check
+http
 
-🟡 In Progress / Next
+GET /api/health
 
-    ⏳ Deploy on VPS with Tor – Setup hidden service for privacy-focused access
+Response:
+json
 
-    ⏳ Admin user management UI – View and promote users
+{
+  "status": "ok",
+  "timestamp": "2026-07-16T09:30:00.000Z",
+  "service": "MyZubster Backend",
+  "version": "1.1.0",
+  "database": "in-memory (test)",
+  "monero": {
+    "rpc": "http://localhost:18083",
+    "network": "testnet"
+  },
+  "stats": {
+    "totalOrders": 5,
+    "pendingOrders": 3,
+    "completedOrders": 2
+  }
+}
 
-    ⏳ Order detail modal – Popup with full order details
+📊 Payment Flow
 
-    ⏳ Export orders – CSV/PDF reports
+    Customer places an order → Backend generates a unique Monero subaddress
 
-    ⏳ Onion landing page – Advertising site for darknet
+    Customer sends Monero to the subaddress
 
-🔵 Future
+    Payment Monitor (runs every 60 seconds) checks get_transfers for incoming payments
 
-    🔹 Mainnet Monero payments
+    Status updates to completed when payment is confirmed
 
-    🔹 Mobile app (React Native)
+    Customer sees the updated status via the API
 
-    🔹 Analytics dashboard with charts
-
-    🔹 Multi-language support (i18n)
-
-    🔹 Email notifications for order status
-
-    🔹 Telegram/Discord notifications
-
-🧅 Tor / Onion Site Roadmap
-#	Task	Status
-1	Install Tor on VPS	⏳
-2	Configure hidden service	⏳
-3	Get onion address	⏳
-4	Configure Nginx for onion	⏳
-5	Create advertising landing page	⏳
-6	Publish on darknet directories	⏳
-🤝 Contributing
-
-We welcome contributions of all kinds!
-
-    📜 Code of Conduct
-
-    📖 Contributing Guide
-
-📄 License
-
-This project is dual-licensed under:
-
-    MIT License – for open-source use (LICENSE-MIT.txt)
-
-    GPL-3.0 License – for code reuse (LICENSE-GPLv3.txt)
-
-🙏 Acknowledgments
-
-Built with ❤️ by Danielloni-creator
-
-📢 We welcome contributions! Check out our Contributing Guide to get started. 🚀
+🛠️ Tech Stack
+Component	Technology
+Backend	Node.js + Express
+Database	In-memory (PostgreSQL/MongoDB ready)
+Wallet RPC	monero-wallet-rpc
+Exchange Rate	CoinGecko API
+Monitoring	node-cron (every 60 seconds)
+Authentication	JWT (optional)
+Logging	Winston
+📁 Project Structure
 text
 
+backend/
+├── app.js                 # Main application entry point
+├── services/
+│   ├── exchangeRate.js    # XMR/USD exchange rate
+│   └── paymentMonitor.js  # Payment monitoring (cron job)
+├── routes/                # API routes (if used)
+├── models/                # Database models (if used)
+└── .env.example           # Environment variables template
 
----
+🧪 Testing with Testnet
 
-## 💾 SALVA E CHIUDI
+    Get testnet Monero from a faucet (e.g., https://faucet.monero.town/)
 
-- Premi **Ctrl+S**
-- Chiudi Notepad
+    Create an order via API
 
----
+    Send testnet XMR to the generated subaddress
 
-## 📤 CARICA SU GITHUB
+    Wait 60 seconds for the monitor to detect the payment
 
-```cmd
-git add README.md
-git commit -m "docs: aggiornato README con roadmap completa e sintetizzata
+    Check order status with GET /api/orders/status/completed
 
-- Tutte le funzionalità implementate (v1.0)
-- Roadmap con stato attuale (completed, in progress, future)
-- Sezione dedicata a Tor/Onion site roadmap
-- Link e documentazione completi
-"
-git push origin main
+🤝 Contributing
 
-✅ README COMPLETO
-Sezione	Contenuto
-Badge	Licenze e contributi
-Live Site	URL del sito e admin panel
-Features	Admin Panel, Security, Monero, WebSocket
-Tech Stack	Tecnologie utilizzate
-Local Development	Istruzioni per avvio locale
-Project URLs	URL di produzione e locali
-Roadmap	Completed, In Progress, Future
-Tor/Onion	Roadmap specifica per il sito onion
-Contributing	Link alle guide
-License	Doppia licenza MIT/GPL-3.0
+Contributions are welcome! Feel free to:
 
-Il README è ora completo e pronto per il repository! 🚀
+    🐛 Report bugs
+
+    💡 Suggest features
+
+    🔧 Submit pull requests
+
+Please read our Contributing Guidelines before submitting.
+📄 License
+
+This project is licensed under the MIT License — see the LICENSE file for details.
+🌟 Support
+
+If you find this project useful, please give it a ⭐ on GitHub!
+📬 Contact
+
+    GitHub: DanielIoni-creator
+
+    Project: MyZubsterAPP
+
+Built with ❤️ for the Monero community
