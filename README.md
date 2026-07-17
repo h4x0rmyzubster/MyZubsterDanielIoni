@@ -31,7 +31,7 @@ git clone https://github.com/DanielIoni-creator/MyZubsterAPP.git
 cd MyZubsterAPP/backend
 cp .env.example .env
 docker-compose up -d
-he API will be available at http://localhost:3000
+The API will be available at http://localhost:3000
 🔧 API Endpoints
 Method	Endpoint	Description
 POST	/api/auth/login	Login and get JWT token
@@ -42,9 +42,9 @@ GET	/api/orders/status/:status	Get orders by status
 GET	/api/health	Health check
 🔗 Related Projects
 
-    MyZubster-Marketplace — Example skills marketplace that uses this gateway → GitHub
+    MyZubster-Marketplace — Example skills marketplace → GitHub
 
-    MyZubster-App — Android app for the marketplace → GitHub
+    MyZubster-App — Android app → GitHub
 
 📄 License
 
