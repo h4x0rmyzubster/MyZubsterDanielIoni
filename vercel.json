@@ -1,9 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" }
-  ],
-  "builds": [
-    { "src": "api/index.js", "use": "@vercel/node" },
-    { "src": "web-dashboard/build/**", "use": "@vercel/static-build" }
-  ]
-}
