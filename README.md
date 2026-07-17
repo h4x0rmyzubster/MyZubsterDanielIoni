@@ -48,6 +48,19 @@ text
 
 ## 📖 Open Source Projects
 
+## 📱 MyZubster App (Android)
+
+**Repository:** [DanielIoni-creator/MyZubster-App](https://github.com/DanielIoni-creator/MyZubster-App)
+
+The official Android app for MyZubster. Built with Kotlin and Jetpack Compose.
+
+**Features (planned):**
+- 👤 User authentication (JWT)
+- 🛠️ Browse skills and services
+- 💰 Pay with Monero via MyZubster
+- 📦 Track orders and payments
+- 👨‍💼 Seller dashboard
+
 ### 1️⃣ MyZubster (Core Gateway)
 
 **Repository:** [DanielIoni-creator/MyZubsterAPP](https://github.com/DanielIoni-creator/MyZubsterAPP)
