@@ -266,8 +266,8 @@ I hope MyZubster can evolve into a global platform where freedom, privacy, and p
 
 
 
-&#x20;   📱 Founder of "Monero Italia" (Facebook group)
 
+&#x20;   📱 Founder of "Monero Italia" (Facebook group)
 
 
 &#x20;   🐱 Cat dad to Chanel
@@ -279,4 +279,15 @@ I hope MyZubster can evolve into a global platform where freedom, privacy, and p
 
 
 Built with ❤️ for the Monero community.
+
+Follow the development of MyZubster and connect with me on social media:
+
+- 📖 **Blog & Articles**: [DEV.to - Daniel Ioni](https://dev.to/danielioni)
+- 🐦 **X (Twitter)**: [@myzubster](https://x.com/myzubster)
+- 💼 **LinkedIn**: [Daniel Ioni](https://www.linkedin.com/in/daniel-ioni-62b2b9423/)
+- 🐙 **GitHub**: [DanielIoni-creator](https://github.com/DanielIoni-creator)
+
+**Stay updated on the journey!** 🚀
+
+
 

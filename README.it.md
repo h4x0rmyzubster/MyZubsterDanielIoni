@@ -206,5 +206,14 @@ La mia visione per MyZubster è creare un ecosistema libero, aperto e accessibil
 
 Realizzato con ❤️ per la community Monero.
 
+Follow the development of MyZubster and connect with me on social media:
+
+- 📖 **Blog & Articles**: [DEV.to - Daniel Ioni](https://dev.to/danielioni)
+- 🐦 **X (Twitter)**: [@myzubster](https://x.com/myzubster)
+- 💼 **LinkedIn**: [Daniel Ioni](https://www.linkedin.com/in/daniel-ioni-62b2b9423/)
+- 🐙 **GitHub**: [DanielIoni-creator](https://github.com/DanielIoni-creator)
+
+**Stay updated on the journey!** 🚀
+
 
 
