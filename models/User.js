@@ -1,57 +1,106 @@
-// models/User.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const userSchema = new mongoose.Schema(
-  {
-    email: {
-      type: String,
-      required: [true, 'Email è obbligatoria'],
-      unique: true,
-      trim: true,
-      lowercase: true,
-      match: [/^\S+@\S+\.\S+$/, 'Inserisci un email valida']
-    },
-    password: {
-      type: String,
-      required: [true, 'Password è obbligatoria'],
-      minlength: [6, 'Password deve essere almeno 6 caratteri'],
-      select: false // Non restituire la password nelle query
-    },
-    name: {
-      type: String,
-      required: [true, 'Nome è obbligatorio'],
-      trim: true
-    },
-    role: {
-      type: String,
-      enum: ['user', 'admin'],
-      default: 'user'
-    },
-    isActive: {
-      type: Boolean,
-      default: true
-    },
-    lastLogin: {
-      type: Date
-    }
+const UserSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    trim: true,
+    minlength: 3,
+    maxlength: 30
+    // ← RIMOSSO unique: true
   },
-  {
-    timestamps: true
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true
+    // ← RIMOSSO unique: true
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6
+  },
+  firstName: {
+    type: String,
+    trim: true
+  },
+  lastName: {
+    type: String,
+    trim: true
+  },
+  phone: {
+    type: String,
+    trim: true
+  },
+  location: {
+    type: String,
+    trim: true
+  },
+  zone: {
+    type: String,
+    trim: true
+  },
+  moneroAddress: {
+    type: String,
+    trim: true
+  },
+  moneroViewKey: {
+    type: String,
+    trim: true
+  },
+  role: {
+    type: String,
+    enum: ['user', 'admin', 'moderator'],
+    default: 'user'
+  },
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
+  averageRating: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 5
+  },
+  reviewCount: {
+    type: Number,
+    default: 0
+  },
+  credits: {
+    type: Number,
+    default: 0
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  lastLogin: {
+    type: Date
   }
-);
+}, {
+  timestamps: true
+});
 
 // Hash password prima del salvataggio
-userSchema.pre('save', async function(next) {
+UserSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+  this.password = await bcrypt.hash(this.password, 10);
   next();
 });
 
 // Metodo per confrontare password
-userSchema.methods.comparePassword = async function(candidatePassword) {
+UserSchema.methods.comparePassword = async function(candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
 
-module.exports = mongoose.model('User', userSchema);
+// ============================================
+// INDICI - DEFINITI UNA SOLA VOLTA QUI
+// ============================================
+UserSchema.index({ email: 1 }, { unique: true });
+UserSchema.index({ username: 1 }, { unique: true });
+UserSchema.index({ zone: 1 });
+
+module.exports = mongoose.model('User', UserSchema);
