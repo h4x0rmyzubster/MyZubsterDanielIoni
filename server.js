@@ -19,18 +19,19 @@ const tariRoutes = require('./routes/tari');
 const onionRoutes = require('./routes/onion');
 const osintRoutes = require('./routes/osint');
 const scannerRoutes = require('./routes/scanner');
-const webhookRoutes = require('./routes/webhook');
+const bookingRoutes = require('./routes/bookings');
+const userRoutes = require('./routes/users'); // <-- NUOVA ROUTE
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3002;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// Rotte
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/skills', skillRoutes);
 app.use('/api/offers', offerRoutes);
@@ -47,24 +48,29 @@ app.use('/api/tari', tariRoutes);
 app.use('/api/onion', onionRoutes);
 app.use('/api/osint', osintRoutes);
 app.use('/api/scanner', scannerRoutes);
-app.use('/api', webhookRoutes);
+app.use('/api/bookings', bookingRoutes);
+app.use('/api/users', userRoutes); // <-- NUOVA ROUTE REGISTRATA
 
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// Connessione a MongoDB
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('✅ Connesso a MongoDB');
     startMonitoring();
-    app.listen(PORT, '0.0.0.0', () => {
-      console.log(`🚀 Server avviato sulla porta ${PORT}`);
-      console.log(`🌐 URL: http://localhost:${PORT}`);
-      console.log(`🔍 Health check: http://localhost:${PORT}/api/health`);
-    });
+    if (require.main === module) {
+      app.listen(PORT, '0.0.0.0', () => {
+        console.log(`🚀 Server avviato sulla porta ${PORT}`);
+        console.log(`🌐 URL: http://localhost:${PORT}`);
+        console.log(`🔍 Health check: http://localhost:${PORT}/api/health`);
+      });
+    }
   })
   .catch(err => {
-    console.error('❌ Errore di connessione a MongoDB:', err);
-    process.exit(1);
+    console.error('❌ Errore connessione MongoDB:', err);
   });
+
+module.exports = app;
